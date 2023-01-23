@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>344572098044-f3gbnch4cldmdofg6cpdotam4d5hrret.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.344572098044-f3gbnch4cldmdofg6cpdotam4d5hrret</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB-b5EaRdssoy7XEN1tr5a_i8dAO8SlTbY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>344572098044</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.fluttertask</string>
+	<key>PROJECT_ID</key>
+	<string>trellocolne</string>
+	<key>STORAGE_BUCKET</key>
+	<string>trellocolne.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:344572098044:ios:0cfe663b4da102b24cae79</string>
+</dict>
+</plist>
