@@ -13,6 +13,7 @@ final createTaskControllerProvider = Provider((ref) {
 class CreateTaskControllerImp extends CreateTaskController {
   CreateTaskControllerImp(this.ref);
   final Ref ref;
+
   @override
   Future<bool> createTask(
       String name, String description, String projectName) async {
@@ -25,7 +26,11 @@ class CreateTaskControllerImp extends CreateTaskController {
         "description": description,
         "status": "TODO",
         "id": "67777",
-        "time": Timestamp.now()
+        "timeInHour": 0,
+        "timeInMin": 0,
+        "timeInSec": 0,
+        "isComplete": false,
+        "createdAt": Timestamp.now()
       }).then((value) {
         collectionRef.doc(value.id).update({"id": value.id});
       });

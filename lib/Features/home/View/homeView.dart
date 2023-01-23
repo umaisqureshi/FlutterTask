@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,7 +8,9 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-import '../homeWidgets.dart';
+import '../Components/buildListComp.dart';
+import '../Components/homeMiddleComp.dart';
+import '../Components/homeTopComp.dart';
 import '../model/tasksModel.dart';
 
 class HomeView extends ConsumerStatefulWidget {
@@ -20,12 +21,13 @@ class HomeView extends ConsumerStatefulWidget {
 }
 
 class _HomeViewState extends ConsumerState<HomeView> {
-  late List<AllTasksModel> _lists;
+  List<AllTasksModel> _lists = [];
   String? dateTime;
 
   @override
   void initState() {
     super.initState();
+
     getAllTaskList();
     _lists = List.generate(TaskStatusEnum.values.length, (outerIndex) {
       return AllTasksModel(children: allTaskList);
@@ -107,8 +109,8 @@ class _HomeViewState extends ConsumerState<HomeView> {
                                   return DragAndDropLists(
                                     children: List.generate(
                                         _lists.length,
-                                        (index) => buildList(index,
-                                            _lists[index].children, context)),
+                                        (index) =>
+                                            buildList(index, data, context)),
                                     onItemReorder: _onItemReorder,
                                     onListReorder: _onListReorder,
                                     axis: Axis.horizontal,

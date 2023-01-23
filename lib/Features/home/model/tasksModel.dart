@@ -8,18 +8,39 @@ class AllTasksModel {
   AllTasksModel({required this.children});
 }
 
+class TimerModel {
+  int hour;
+  int min;
+  int sec;
+  String id;
+  TimerModel({
+    required this.hour,
+    required this.min,
+    required this.sec,
+    required this.id,
+  });
+}
+
 class Tasks {
   String name;
   String description;
   String id;
   String status;
   String project;
+  int timeInHour;
+  int timeInMin;
+  int timeInSec;
+  bool isCompleted;
   Timestamp time;
   Tasks({
     required this.name,
     required this.description,
     required this.id,
+    required this.timeInHour,
+    required this.timeInMin,
+    required this.timeInSec,
     required this.project,
+    required this.isCompleted,
     required this.status,
     required this.time,
   });
@@ -31,7 +52,11 @@ class Tasks {
       'id': id,
       'status': status,
       'project': project,
-      'time': time,
+      'createdAt': time,
+      'timeInHour': timeInHour,
+      'timeInSec': timeInSec,
+      'timeInMin': timeInMin,
+      'isComplete': isCompleted
     };
   }
 
@@ -42,7 +67,11 @@ class Tasks {
       description: map['description'] as String,
       id: map['id'] as String,
       status: map['status'] as String,
-      time: map['time'] as Timestamp,
+      time: map['createdAt'] as Timestamp,
+      timeInHour: map['timeInHour'] as int,
+      timeInMin: map['timeInMin'] as int,
+      timeInSec: map['timeInSec'] as int,
+      isCompleted: map['isComplete'] as bool,
     );
   }
 
