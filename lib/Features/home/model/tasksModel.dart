@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AllTasksModel {
   List<Tasks> children;
-  AllTasksModel({ required this.children});
+  AllTasksModel({required this.children});
 }
 
 class Tasks {
@@ -13,11 +13,13 @@ class Tasks {
   String description;
   String id;
   String status;
+  String project;
   Timestamp time;
   Tasks({
     required this.name,
     required this.description,
     required this.id,
+    required this.project,
     required this.status,
     required this.time,
   });
@@ -28,6 +30,7 @@ class Tasks {
       'description': description,
       'id': id,
       'status': status,
+      'project': project,
       'time': time,
     };
   }
@@ -35,6 +38,7 @@ class Tasks {
   factory Tasks.fromMap(Map<String, dynamic> map) {
     return Tasks(
       name: map['name'] as String,
+      project: map['project'] as String,
       description: map['description'] as String,
       id: map['id'] as String,
       status: map['status'] as String,

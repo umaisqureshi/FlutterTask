@@ -2,10 +2,12 @@
 class CreateTaskModel {
   late String name;
   late String description;
+  late String projectName;
   late String status;
   CreateTaskModel({
     required this.name,
     required this.description,
+    required this.projectName,
     required this.status,
   });
 }

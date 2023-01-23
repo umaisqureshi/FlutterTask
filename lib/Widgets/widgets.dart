@@ -3,13 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../Utils/utilis.dart';
 
-Widget raisedTextButton(VoidCallback onPress, String text) {
+Widget raisedTextButton(VoidCallback onPress, String text, Color color) {
   return ElevatedButton(
     onPressed: onPress,
     style: ElevatedButton.styleFrom(
+        backgroundColor: color,
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 50)),
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40)),
     child: Text(
       text,
       style: GoogleFonts.aBeeZee(
@@ -23,6 +24,15 @@ Widget imageWidget(String name, double? height) {
     name,
     fit: BoxFit.cover,
     height: height,
+  );
+}
+
+Widget progressIndicator(BuildContext context) {
+  return Center(
+    child: CircularProgressIndicator(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      strokeWidth: 2,
+    ),
   );
 }
 

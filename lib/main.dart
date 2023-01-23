@@ -38,9 +38,9 @@ class MyApp extends StatelessWidget {
             elevation: 0,
             titleTextStyle:
                 GoogleFonts.aBeeZee(color: Colors.teal, fontSize: 25)),
-        backgroundColor: const Color.fromARGB(255, 28, 28, 28),
+        backgroundColor: Colors.black26,
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.teal)
-            .copyWith(secondary: Colors.white),
+            .copyWith(onBackground: Colors.white),
       ),
       // home: const SplashScreenView(),
     );

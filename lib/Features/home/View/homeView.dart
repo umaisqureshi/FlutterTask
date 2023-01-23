@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertask/Constants/constants.dart';
 import 'package:fluttertask/Features/home/Controller/homeControllerImp.dart';
+import 'package:fluttertask/Widgets/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -21,53 +22,19 @@ class HomeView extends ConsumerStatefulWidget {
 class _HomeViewState extends ConsumerState<HomeView> {
   late List<AllTasksModel> _lists;
   String? dateTime;
-  List<Tasks> todoList = [];
-  List<Tasks> progressList = [];
-  List<Tasks> completeList = [];
 
   @override
   void initState() {
     super.initState();
-    getTodoTaskList();
-    getCompletedTaskList();
-    getInProgressTaskList();
+    getAllTaskList();
     _lists = List.generate(TaskStatusEnum.values.length, (outerIndex) {
-      return AllTasksModel(
-          children: outerIndex == 0
-              ? todoList
-              : outerIndex == 1
-                  ? progressList
-                  : completeList);
+      return AllTasksModel(children: allTaskList);
     });
+
     dateTime = DateFormat.yMMMM().format(DateTime.now());
   }
 
-  getTodoTaskList() {
-    final todo = ref.read(todoListProvider.stream);
-    todo.forEach((element) {
-      for (var todoData in element) {
-        todoList.add(todoData);
-      }
-    });
-  }
-
-  getInProgressTaskList() {
-    final progress = ref.read(inProgressListProvider.stream);
-    progress.forEach((element) {
-      for (var progressData in element) {
-        progressList.add(progressData);
-      }
-    });
-  }
-
-  getCompletedTaskList() {
-    final complete = ref.read(completeListProvider.stream);
-    complete.forEach((element) {
-      for (var completeData in element) {
-        completeList.add(completeData);
-      }
-    });
-  }
+  List<Tasks> allTaskList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -86,64 +53,79 @@ class _HomeViewState extends ConsumerState<HomeView> {
           },
         ),
         backgroundColor: Theme.of(context).backgroundColor,
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            homeTopWidget(),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 12.0),
-              child: Text(
-                dateTime!,
-                style: GoogleFonts.aBeeZee(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w900),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            homeMiddleWidget(6, 2, 2 / 6 * 100),
-            SizedBox(
-              height: size.height * 0.03,
-            ),
-            Expanded(
-              child: Column(
+        body: _lists.isEmpty
+            ? progressIndicator(context)
+            : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  homeTopWidget(context),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    padding: const EdgeInsets.only(left: 12.0),
                     child: Text(
-                      "TASKS",
+                      dateTime!,
                       style: GoogleFonts.aBeeZee(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.onBackground,
                           fontSize: 20,
                           fontWeight: FontWeight.w900),
                     ),
                   ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ref.watch(allTaskListProvider).when(
+                        data: (data) => homeMiddleWidget(data, context),
+                        error: (error, stackTrace) => Text(error.toString()),
+                        loading: () => progressIndicator(context),
+                      ),
+                  SizedBox(
+                    height: size.height * 0.03,
+                  ),
                   Expanded(
-                    child: DragAndDropLists(
-                      children: List.generate(_lists.length,
-                          (index) => buildList(index, _lists, context)),
-                      onItemReorder: _onItemReorder,
-                      onListReorder: _onListReorder,
-                      axis: Axis.horizontal,
-                      listWidth: 300,
-                      listDraggingWidth: 300,
-                      listPadding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: Text(
+                            "TASKS",
+                            style: GoogleFonts.aBeeZee(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w900),
+                          ),
+                        ),
+                        Expanded(
+                            child: ref.watch(allTaskListProvider).when(
+                                data: (data) {
+                                  return DragAndDropLists(
+                                    children: List.generate(
+                                        _lists.length,
+                                        (index) => buildList(index,
+                                            _lists[index].children, context)),
+                                    onItemReorder: _onItemReorder,
+                                    onListReorder: _onListReorder,
+                                    axis: Axis.horizontal,
+                                    listWidth: 330,
+                                    listDraggingWidth: 330,
+                                    listPadding: const EdgeInsets.all(12.0),
+                                  );
+                                },
+                                error: ((error, stackTrace) {
+                                  return Text(error.toString());
+                                }),
+                                loading: () => progressIndicator(context))),
+                      ],
                     ),
                   ),
                 ],
               ),
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -160,6 +142,16 @@ class _HomeViewState extends ConsumerState<HomeView> {
     setState(() {
       var movedList = _lists.removeAt(oldListIndex);
       _lists.insert(newListIndex, movedList);
+    });
+  }
+
+  getAllTaskList() {
+    final allTasks = ref.read(allTaskListProvider.stream);
+    allTasks.forEach((element) {
+      for (var allTaskData in element) {
+        allTaskList.add(allTaskData);
+      }
+      setState(() {});
     });
   }
 }

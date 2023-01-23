@@ -17,12 +17,14 @@ class CreateTaskView extends ConsumerStatefulWidget {
 class _CreateTaskViewState extends ConsumerState<CreateTaskView> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController projectController = TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
     nameController.dispose();
     descriptionController.dispose();
+    projectController.dispose();
   }
 
   @override
@@ -65,7 +67,7 @@ class _CreateTaskViewState extends ConsumerState<CreateTaskView> {
                       ),
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     Text(
                       "Task",
@@ -75,17 +77,17 @@ class _CreateTaskViewState extends ConsumerState<CreateTaskView> {
                           fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     textFieldWidget(nameController, "Task Title", 1, (value) {
                       nameController.text = value;
                       setState(() {});
                     }, context),
                     const SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     Text(
-                      "Description",
+                      "Project",
                       style: GoogleFonts.aBeeZee(
                           color: Theme.of(context).colorScheme.onBackground,
                           fontSize: 20,
@@ -94,8 +96,25 @@ class _CreateTaskViewState extends ConsumerState<CreateTaskView> {
                     const SizedBox(
                       height: 20,
                     ),
+                    textFieldWidget(nameController, "Project name", 1, (value) {
+                      projectController.text = value;
+                      setState(() {});
+                    }, context),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Description",
+                      style: GoogleFonts.aBeeZee(
+                          color: Theme.of(context).colorScheme.onBackground,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     textFieldWidget(
-                        descriptionController, "Task Description", 12, (value) {
+                        descriptionController, "Task Description", 8, (value) {
                       descriptionController.text = value;
                       setState(() {});
                     }, context),
@@ -103,23 +122,23 @@ class _CreateTaskViewState extends ConsumerState<CreateTaskView> {
                       height: size.height * 0.07,
                     ),
                     Center(
-                        child: raisedTextButton(
-                      () async {
-                        if (descriptionController.text.isNotEmpty &&
-                            nameController.text.isNotEmpty) {
-                          bool added = await ref
-                              .read(createTaskControllerProvider)
-                              .createTask(nameController.text,
-                                  descriptionController.text);
-                          if (added) {
-                            // ignore: use_build_context_synchronously
-                            showSnackBar(context, "Task Added Successfully");
-                            context.pop();
-                          }
+                        child: raisedTextButton(() async {
+                      if (descriptionController.text.isNotEmpty &&
+                          nameController.text.isNotEmpty &&
+                          projectController.text.isNotEmpty) {
+                        bool added = await ref
+                            .read(createTaskControllerProvider)
+                            .createTask(
+                                nameController.text,
+                                descriptionController.text,
+                                projectController.text);
+                        if (added) {
+                          // ignore: use_build_context_synchronously
+                          showSnackBar(context, "Task Added Successfully");
+                          context.pop();
                         }
-                      },
-                      "Create",
-                    )),
+                      }
+                    }, "Create", Theme.of(context).primaryColor)),
                   ],
                 ),
               ),

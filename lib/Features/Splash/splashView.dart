@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -49,7 +48,7 @@ class SplashScreenView extends StatelessWidget {
                     Text(
                       "Work Better,\nTogether",
                       style: GoogleFonts.aBeeZee(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.onBackground,
                           fontSize: 40,
                           fontWeight: FontWeight.w600),
                     ),
@@ -60,7 +59,7 @@ class SplashScreenView extends StatelessWidget {
                       child: Text(
                         splashText,
                         style: GoogleFonts.aBeeZee(
-                            color: Colors.white60,
+                            color: Theme.of(context).colorScheme.onBackground,
                             fontSize: 15,
                             fontWeight: FontWeight.w300),
                       ),
@@ -75,7 +74,7 @@ class SplashScreenView extends StatelessWidget {
                   child: Center(
                       child: raisedTextButton(() {
                 context.go("/HOME");
-              }, "Get Started")))
+              }, "Get Started", Theme.of(context).primaryColor)))
             ],
           ),
         ),
