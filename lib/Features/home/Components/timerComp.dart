@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertask/Features/home/Controller/homeControllerImp.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'model/tasksModel.dart';
+import '../model/tasksModel.dart';
 
 // ignore: must_be_immutable
 class TimerWidget extends ConsumerStatefulWidget {

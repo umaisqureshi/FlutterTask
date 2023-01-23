@@ -1,10 +1,9 @@
-
 import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertask/Features/home/model/tasksModel.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../homeWidgets.dart';
+import 'timerComp.dart';
 
 buildItem(Tasks item, BuildContext context, Color color) {
   double height = item.status == "IN PROGRESS" ? 110 : 100;
@@ -50,12 +49,17 @@ buildItem(Tasks item, BuildContext context, Color color) {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      item.name,
-                      style: GoogleFonts.aBeeZee(
-                          color: Theme.of(context).colorScheme.onBackground,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600),
+                    SizedBox(
+                      width: 130,
+                      child: Text(
+                        item.name,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                        style: GoogleFonts.aBeeZee(
+                            color: Theme.of(context).colorScheme.onBackground,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600),
+                      ),
                     ),
                     const SizedBox(
                       height: 3,
