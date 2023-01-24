@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertask/Features/TaskDetailView/View/taskDetailView.dart';
+import 'package:fluttertask/Features/home/model/tasksModel.dart';
 import 'package:go_router/go_router.dart';
 
 import '../Features/CreateTask/View/createTaskView.dart';
@@ -24,7 +26,17 @@ class Routes {
           GoRoute(
             path: 'CREATETASK',
             pageBuilder: (BuildContext context, GoRouterState state) {
-              return const MaterialPage(child:  CreateTaskView());
+              return const MaterialPage(child: CreateTaskView());
+            },
+          ),
+          GoRoute(
+            path: 'TASKVIEW',
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              Tasks task = state.extra as Tasks;
+              return MaterialPage(
+                  child: TaskDetailedView(
+                task: task,
+              ));
             },
           ),
         ],

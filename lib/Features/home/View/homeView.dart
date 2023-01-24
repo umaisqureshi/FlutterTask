@@ -42,92 +42,96 @@ class _HomeViewState extends ConsumerState<HomeView> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
-      child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Theme.of(context).primaryColor,
-          elevation: 20,
-          hoverColor: Theme.of(context).primaryColor,
-          hoverElevation: 50,
-          shape: const StadiumBorder(),
-          child: const Icon(Icons.add),
-          onPressed: () {
-            context.push("/CREATETASK");
-          },
-        ),
-        backgroundColor: Theme.of(context).backgroundColor,
-        body: _lists.isEmpty
-            ? progressIndicator(context)
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  homeTopWidget(context),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12.0),
-                    child: Text(
-                      dateTime!,
-                      style: GoogleFonts.aBeeZee(
-                          color: Theme.of(context).colorScheme.onBackground,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w900),
+      child: SafeArea(
+        child: Scaffold(
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Theme.of(context).primaryColor,
+            elevation: 20,
+            hoverColor: Theme.of(context).primaryColor,
+            hoverElevation: 50,
+            shape: const StadiumBorder(),
+            child: const Icon(Icons.add),
+            onPressed: () {
+              context.push("/CREATETASK");
+            },
+          ),
+          backgroundColor: Theme.of(context).backgroundColor,
+          body: _lists.isEmpty
+              ? progressIndicator(context)
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    homeTopWidget(context),
+                    const SizedBox(
+                      height: 20,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  ref.watch(allTaskListProvider).when(
-                        data: (data) => homeMiddleWidget(data, context),
-                        error: (error, stackTrace) => Text(error.toString()),
-                        loading: () => progressIndicator(context),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12.0),
+                      child: Text(
+                        dateTime!,
+                        style: GoogleFonts.aBeeZee(
+                            color: Theme.of(context).colorScheme.onBackground,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900),
                       ),
-                  SizedBox(
-                    height: size.height * 0.03,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                          child: Text(
-                            "TASKS",
-                            style: GoogleFonts.aBeeZee(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w900),
-                          ),
-                        ),
-                        Expanded(
-                            child: ref.watch(allTaskListProvider).when(
-                                data: (data) {
-                                  return DragAndDropLists(
-                                    children: List.generate(
-                                        _lists.length,
-                                        (index) =>
-                                            buildList(index, data, context)),
-                                    onItemReorder: _onItemReorder,
-                                    onListReorder: _onListReorder,
-                                    axis: Axis.horizontal,
-                                    listWidth: 330,
-                                    listDraggingWidth: 330,
-                                    listPadding: const EdgeInsets.all(12.0),
-                                  );
-                                },
-                                error: ((error, stackTrace) {
-                                  return Text(error.toString());
-                                }),
-                                loading: () => progressIndicator(context))),
-                      ],
                     ),
-                  ),
-                ],
-              ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ref.watch(allTaskListProvider).when(
+                          data: (data) => homeMiddleWidget(data, context),
+                          error: (error, stackTrace) => Text(error.toString()),
+                          loading: () => progressIndicator(context),
+                        ),
+                    SizedBox(
+                      height: size.height * 0.03,
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Text(
+                              "TASKS",
+                              style: GoogleFonts.aBeeZee(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w900),
+                            ),
+                          ),
+                          Expanded(
+                              child: ref.watch(allTaskListProvider).when(
+                                  data: (data) {
+                                    return DragAndDropLists(
+                                      children: List.generate(
+                                          _lists.length,
+                                          (index) =>
+                                              buildList(index, data, context)),
+                                      onItemReorder: _onItemReorder,
+                                      onListReorder: _onListReorder,
+                                      axis: Axis.horizontal,
+                                      listWidth: 330,
+                                      listDraggingWidth: 300,
+                                      listPadding: const EdgeInsets.all(12.0),
+                                    );
+                                  },
+                                  error: ((error, stackTrace) {
+                                    return Text(error.toString());
+                                  }),
+                                  loading: () => progressIndicator(context))),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+        ),
       ),
     );
   }

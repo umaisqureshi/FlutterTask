@@ -82,7 +82,7 @@ class _CreateTaskViewState extends ConsumerState<CreateTaskView> {
                     textFieldWidget(nameController, "Task Title", 1, (value) {
                       nameController.text = value;
                       setState(() {});
-                    }, context),
+                    }, context, 20),
                     const SizedBox(
                       height: 20,
                     ),
@@ -99,7 +99,7 @@ class _CreateTaskViewState extends ConsumerState<CreateTaskView> {
                     textFieldWidget(nameController, "Project name", 1, (value) {
                       projectController.text = value;
                       setState(() {});
-                    }, context),
+                    }, context, 20),
                     const SizedBox(
                       height: 20,
                     ),
@@ -117,7 +117,7 @@ class _CreateTaskViewState extends ConsumerState<CreateTaskView> {
                         descriptionController, "Task Description", 8, (value) {
                       descriptionController.text = value;
                       setState(() {});
-                    }, context),
+                    }, context, 200),
                     SizedBox(
                       height: size.height * 0.07,
                     ),

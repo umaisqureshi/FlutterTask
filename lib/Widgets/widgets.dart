@@ -36,11 +36,17 @@ Widget progressIndicator(BuildContext context) {
   );
 }
 
-Widget textFieldWidget(TextEditingController controller, String hint,
-    int maxLine, void Function(String)? onPress, BuildContext context) {
+Widget textFieldWidget(
+    TextEditingController controller,
+    String hint,
+    int maxLine,
+    void Function(String)? onPress,
+    BuildContext context,
+    int length) {
   return TextField(
     maxLines: maxLine,
     onChanged: onPress,
+    maxLength: length,
     style: GoogleFonts.aBeeZee(
         color: Theme.of(context).colorScheme.onBackground,
         fontSize: 10,
@@ -48,6 +54,15 @@ Widget textFieldWidget(TextEditingController controller, String hint,
     decoration: inputDecorationTextField.copyWith(
       hintText: hint,
     ),
+  );
+}
+
+Widget iconButton(Icon icon, VoidCallback onPress, Color color) {
+  return IconButton(
+    color: color,
+    iconSize: 18,
+    onPressed: onPress,
+    icon: icon,
   );
 }
 
