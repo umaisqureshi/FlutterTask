@@ -131,7 +131,8 @@ class _CreateTaskViewState extends ConsumerState<CreateTaskView> {
                             .createTask(
                                 nameController.text,
                                 descriptionController.text,
-                                projectController.text);
+                                projectController.text,
+                                "Umais Qureshi");
                         if (added) {
                           // ignore: use_build_context_synchronously
                           showSnackBar(context, "Task Added Successfully");

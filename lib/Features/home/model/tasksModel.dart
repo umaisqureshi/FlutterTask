@@ -31,6 +31,7 @@ class Tasks {
   int timeInMin;
   int timeInSec;
   bool isCompleted;
+  String assignee;
   Timestamp time;
   Tasks({
     required this.name,
@@ -38,6 +39,7 @@ class Tasks {
     required this.id,
     required this.timeInHour,
     required this.timeInMin,
+    required this.assignee,
     required this.timeInSec,
     required this.project,
     required this.isCompleted,
@@ -52,6 +54,7 @@ class Tasks {
       'id': id,
       'status': status,
       'project': project,
+      'assignee': assignee,
       'createdAt': time,
       'timeInHour': timeInHour,
       'timeInSec': timeInSec,
@@ -67,6 +70,7 @@ class Tasks {
       description: map['description'] as String,
       id: map['id'] as String,
       status: map['status'] as String,
+      assignee: map['assignee'] as String,
       time: map['createdAt'] as Timestamp,
       timeInHour: map['timeInHour'] as int,
       timeInMin: map['timeInMin'] as int,

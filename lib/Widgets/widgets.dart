@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../Utils/utilis.dart';
@@ -44,16 +45,24 @@ Widget textFieldWidget(
     BuildContext context,
     int length) {
   return TextField(
+    autofillHints: <String>[hint],
     maxLines: maxLine,
-    onChanged: onPress,
+    onSubmitted: onPress,
+    controller: controller,
     maxLength: length,
+    inputFormatters: [
+      LengthLimitingTextInputFormatter(length),
+    ],
     style: GoogleFonts.aBeeZee(
         color: Theme.of(context).colorScheme.onBackground,
         fontSize: 10,
         fontWeight: FontWeight.bold),
     decoration: inputDecorationTextField.copyWith(
-      hintText: hint,
-    ),
+        hintText: hint,
+        counterText: "",
+        hintStyle: const TextStyle(
+          color: Colors.white24,
+        )),
   );
 }
 
@@ -66,8 +75,65 @@ Widget iconButton(Icon icon, VoidCallback onPress, Color color) {
   );
 }
 
+Widget titleAndDetailedWidget(
+    String title,
+    String description,
+    BuildContext context,
+    Size size,
+    bool editable,
+    TextEditingController? controller,
+    int fieldSize,
+    int boxSize) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Row(
+      children: [
+        Row(
+          children: [
+            Text(
+              title,
+              style: GoogleFonts.aBeeZee(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              width: 3,
+            ),
+            Text(
+              ":",
+              style: GoogleFonts.aBeeZee(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        SizedBox(
+          width: size.width * 0.60,
+          child: editable
+              ? textFieldWidget(controller!, description, fieldSize, (p0) {
+                  controller.text = p0;
+                }, context, boxSize)
+              : Text(
+                  description,
+                  style: GoogleFonts.aBeeZee(
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold),
+                ),
+        )
+      ],
+    ),
+  );
+}
+
 showSnackBar(BuildContext context, String text) {
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
       behavior: SnackBarBehavior.floating,
       margin: const EdgeInsets.symmetric(vertical: 80, horizontal: 40),
       backgroundColor: Colors.white,
@@ -76,9 +142,11 @@ showSnackBar(BuildContext context, String text) {
       padding: const EdgeInsets.all(20),
       content: Text(
         text,
-        style: GoogleFonts.roboto(
+        style: GoogleFonts.aBeeZee(
             color: Theme.of(context).primaryColor,
             fontSize: 12,
             fontWeight: FontWeight.bold),
-      )));
+      ),
+    ),
+  );
 }
