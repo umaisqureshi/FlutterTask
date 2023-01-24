@@ -7,7 +7,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'timerComp.dart';
 
 buildItem(Tasks item, BuildContext context, Color color) {
-  double height = item.status == "IN PROGRESS" ? 110 : 100;
+  double height = item.status == "In Progress" ? 110 : 100;
+
+
+  
   return DragAndDropItem(
     child: GestureDetector(
       onTap: () {
@@ -107,7 +110,7 @@ buildItem(Tasks item, BuildContext context, Color color) {
                                 ),
                               ),
                             )
-                          : item.status == "IN PROGRESS"
+                          : item.status == "In Progress"
                               ? TimerWidget(
                                   id: item.id,
                                   seconds: item.timeInHour * 3600 +

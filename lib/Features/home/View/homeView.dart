@@ -156,8 +156,8 @@ class _HomeViewState extends ConsumerState<HomeView> {
     allTasks.forEach((element) {
       for (var allTaskData in element) {
         allTaskList.add(allTaskData);
+        setState(() {});
       }
-      setState(() {});
     });
   }
 }

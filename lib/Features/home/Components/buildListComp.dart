@@ -1,4 +1,3 @@
-
 import 'package:drag_and_drop_lists/drag_and_drop_list.dart';
 import 'package:flutter/material.dart';
 
@@ -10,16 +9,16 @@ buildList(int outerIndex, List<Tasks> lists, BuildContext context) {
   List<Tasks> todoList = [];
   List<Tasks> inProgressList = [];
 
-  for (var complete in lists.where((element) => element.status == "COMPLETE")) {
+  for (var complete in lists.where((element) => element.status == "Complete")) {
     completeList.add(complete);
   }
 
-  for (var todo in lists.where((element) => element.status == "TODO")) {
+  for (var todo in lists.where((element) => element.status == "Todo")) {
     todoList.add(todo);
   }
 
   for (var inProgress
-      in lists.where((element) => element.status == "IN PROGRESS")) {
+      in lists.where((element) => element.status == "In Progress")) {
     inProgressList.add(inProgress);
   }
   return DragAndDropList(

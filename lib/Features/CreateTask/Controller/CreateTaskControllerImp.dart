@@ -15,8 +15,8 @@ class CreateTaskControllerImp extends CreateTaskController {
   final Ref ref;
 
   @override
-  Future<bool> createTask(
-      String name, String description, String projectName, String assignee) async {
+  Future<bool> createTask(String name, String description, String projectName,
+      String assignee) async {
     try {
       final fire = ref.read(firebaseInstanceProvider).firestore;
       CollectionReference collectionRef = fire.collection("Tasks");
@@ -24,7 +24,7 @@ class CreateTaskControllerImp extends CreateTaskController {
         "name": name,
         "project": projectName,
         "description": description,
-        "status": "TODO",
+        "status": "Todo",
         "id": "67777",
         "timeInHour": 0,
         "timeInMin": 0,

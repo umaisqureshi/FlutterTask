@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../Features/TaskDetailView/Component/statusChangeComp.dart';
 import '../Utils/utilis.dart';
 
 Widget raisedTextButton(VoidCallback onPress, String text, Color color) {
@@ -11,7 +12,7 @@ Widget raisedTextButton(VoidCallback onPress, String text, Color color) {
         backgroundColor: color,
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40)),
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20)),
     child: Text(
       text,
       style: GoogleFonts.aBeeZee(
@@ -66,14 +67,12 @@ Widget textFieldWidget(
   );
 }
 
-Widget iconButton(Icon icon, VoidCallback onPress, Color color) {
-  return IconButton(
-    color: color,
-    iconSize: 18,
-    onPressed: onPress,
-    icon: icon,
-  );
-}
+Widget iconButton(Icon icon, VoidCallback onPress, Color color) => IconButton(
+      color: color,
+      iconSize: 18,
+      onPressed: onPress,
+      icon: icon,
+    );
 
 Widget titleAndDetailedWidget(
     String title,
@@ -114,18 +113,49 @@ Widget titleAndDetailedWidget(
         ),
         SizedBox(
           width: size.width * 0.60,
-          child: editable
-              ? textFieldWidget(controller!, description, fieldSize, (p0) {
-                  controller.text = p0;
-                }, context, boxSize)
-              : Text(
-                  description,
-                  style: GoogleFonts.aBeeZee(
-                      color: Theme.of(context).colorScheme.onBackground,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold),
-                ),
+          child: editable && title == "Status"
+              ? StatusChangeWidget(
+                  selectedStatus: description,
+                )
+              : editable
+                  ? textFieldWidget(controller!, description, fieldSize, (p0) {
+                      controller.text = p0;
+                    }, context, boxSize)
+                  : Text(
+                      description,
+                      style: GoogleFonts.aBeeZee(
+                          color: Theme.of(context).colorScheme.onBackground,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold),
+                    ),
         )
+      ],
+    ),
+  );
+}
+
+showDialogBox(
+    BuildContext context, String title, String message, VoidCallback onPress) {
+  showDialog(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      backgroundColor: Theme.of(context).backgroundColor.withOpacity(0.9),
+      title: Text(
+        title,
+        style: GoogleFonts.aBeeZee(
+            color: Theme.of(context).primaryColor,
+            fontSize: 12,
+            fontWeight: FontWeight.bold),
+      ),
+      content: Text(
+        message,
+        style: GoogleFonts.aBeeZee(
+            color: Theme.of(context).colorScheme.onBackground,
+            fontSize: 10,
+            fontWeight: FontWeight.w500),
+      ),
+      actions: <Widget>[
+        raisedTextButton(onPress, "Delete", Theme.of(context).primaryColor),
       ],
     ),
   );

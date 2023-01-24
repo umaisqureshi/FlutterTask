@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertask/Features/TaskDetailView/Component/statusChangeComp.dart';
+import 'package:fluttertask/Features/TaskDetailView/Controller/taskViewControllerImp.dart';
 import 'package:fluttertask/Features/home/model/tasksModel.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../Widgets/widgets.dart';
@@ -127,6 +130,18 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
                                 ),
                           editable
                               ? raisedTextButton(() {
+                                  ref.read(updateTasksProvider(Tasks(
+                                      name: taskName.text,
+                                      description: descriptionName.text,
+                                      id: widget.task.id,
+                                      timeInHour: widget.task.timeInHour,
+                                      timeInMin: widget.task.timeInMin,
+                                      assignee: assigneeName.text,
+                                      timeInSec: widget.task.timeInSec,
+                                      project: projectName.text,
+                                      isCompleted: widget.task.isCompleted,
+                                      status: ref.read(statusValueProvider),
+                                      time: widget.task.time)));
                                   setState(() {
                                     editable = false;
                                   });
@@ -145,7 +160,17 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
                                     statusName.text = widget.task.status;
                                     assigneeName.text = widget.task.assignee;
                                   },
-                                  onDelete: () {})
+                                  onDelete: () {
+                                    showDialogBox(context, "Delete Task",
+                                        "You Really want to delete this task",
+                                        (() {
+                                      ref.read(
+                                          deleteTaskProvider(widget.task.id));
+                                      showSnackBar(
+                                          context, "Task Deleted Successfully");
+                                      context.push("/HOME");
+                                    }));
+                                  })
                         ],
                       ),
                     ),

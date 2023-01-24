@@ -8,7 +8,7 @@ homeMiddleWidget(List<Tasks> allList, BuildContext context) {
   List<Tasks> completeList = [];
 
   for (var complete
-      in allList.where((element) => element.status == "COMPLETE")) {
+      in allList.where((element) => element.status == "Complete")) {
     completeList.add(complete);
   }
 

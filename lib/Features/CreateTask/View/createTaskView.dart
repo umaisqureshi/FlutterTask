@@ -96,7 +96,8 @@ class _CreateTaskViewState extends ConsumerState<CreateTaskView> {
                     const SizedBox(
                       height: 20,
                     ),
-                    textFieldWidget(nameController, "Project name", 1, (value) {
+                    textFieldWidget(projectController, "Project name", 1,
+                        (value) {
                       projectController.text = value;
                       setState(() {});
                     }, context, 20),
