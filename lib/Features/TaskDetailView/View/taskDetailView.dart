@@ -5,6 +5,7 @@ import 'package:fluttertask/Features/TaskDetailView/Controller/taskViewControlle
 import 'package:fluttertask/Features/home/model/tasksModel.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 import '../../../Widgets/widgets.dart';
 import '../Component/taskDetailedBottomComp.dart';
@@ -29,6 +30,11 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    print(widget.task.createdAt);
+    DateTime formattedDate =
+        DateTime.fromMillisecondsSinceEpoch(widget.task.createdAt);
+    print(formattedDate);
+    print(DateTime.now());
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
@@ -96,7 +102,7 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
                               context, size, editable, statusName, 1, 10),
                           titleAndDetailedWidget(
                               "Created at",
-                              "${widget.task.time.toDate().day.toString()}-${widget.task.time.toDate().month.toString()}-${widget.task.time.toDate().year.toString()}",
+                              "${formattedDate.day.toString()}-${formattedDate.month.toString()}-${formattedDate.year.toString()}",
                               context,
                               size,
                               false,
@@ -141,10 +147,11 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
                                       project: projectName.text,
                                       isCompleted: widget.task.isCompleted,
                                       status: ref.read(statusValueProvider),
-                                      time: widget.task.time)));
+                                      createdAt: widget.task.createdAt)));
                                   setState(() {
                                     editable = false;
                                   });
+                                  context.push("/HOME");
                                 }, " Save ", Theme.of(context).primaryColor)
                               : TaskDetailedTopComp(
                                   size: size,

@@ -8,18 +8,7 @@ class AllTasksModel {
   AllTasksModel({required this.children});
 }
 
-class TimerModel {
-  int hour;
-  int min;
-  int sec;
-  String id;
-  TimerModel({
-    required this.hour,
-    required this.min,
-    required this.sec,
-    required this.id,
-  });
-}
+
 
 class Tasks {
   String name;
@@ -32,7 +21,7 @@ class Tasks {
   int timeInSec;
   bool isCompleted;
   String assignee;
-  Timestamp time;
+  int createdAt;
   Tasks({
     required this.name,
     required this.description,
@@ -44,7 +33,7 @@ class Tasks {
     required this.project,
     required this.isCompleted,
     required this.status,
-    required this.time,
+    required this.createdAt,
   });
 
   Map<String, dynamic> toMap() {
@@ -55,7 +44,7 @@ class Tasks {
       'status': status,
       'project': project,
       'assignee': assignee,
-      'createdAt': time,
+      'createdAt': createdAt,
       'timeInHour': timeInHour,
       'timeInSec': timeInSec,
       'timeInMin': timeInMin,
@@ -71,7 +60,7 @@ class Tasks {
       id: map['id'] as String,
       status: map['status'] as String,
       assignee: map['assignee'] as String,
-      time: map['createdAt'] as Timestamp,
+      createdAt: map['createdAt'] as int,
       timeInHour: map['timeInHour'] as int,
       timeInMin: map['timeInMin'] as int,
       timeInSec: map['timeInSec'] as int,
@@ -83,4 +72,16 @@ class Tasks {
 
   factory Tasks.fromJson(String source) =>
       Tasks.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+class TimerModel {
+  int hour;
+  int min;
+  int sec;
+  String id;
+  TimerModel({
+    required this.hour,
+    required this.min,
+    required this.sec,
+    required this.id,
+  });
 }

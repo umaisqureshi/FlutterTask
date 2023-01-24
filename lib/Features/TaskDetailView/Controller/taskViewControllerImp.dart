@@ -49,7 +49,7 @@ class TaskViewControllerImp extends TaskViewController {
           "timeInSec": task.timeInSec,
           "assignee": task.assignee,
           "isComplete": task.isCompleted,
-          "createdAt": task.time
+          "createdAt": task.createdAt
         })
         .then((value) => debugPrint("Task Updated"))
         .onError((error, stackTrace) => false);

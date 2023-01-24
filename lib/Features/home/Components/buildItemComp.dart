@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:fluttertask/Features/home/model/tasksModel.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 import 'timerComp.dart';
 
 buildItem(Tasks item, BuildContext context, Color color) {
   double height = item.status == "In Progress" ? 110 : 100;
 
+  DateTime formattedDate =
+      DateTime.fromMillisecondsSinceEpoch(item.createdAt);
 
-  
   return DragAndDropItem(
     child: GestureDetector(
       onTap: () {
@@ -83,7 +85,7 @@ buildItem(Tasks item, BuildContext context, Color color) {
                         height: 3,
                       ),
                       Text(
-                        "Created at : ${item.time.toDate().day.toString()}-${item.time.toDate().month.toString()}-${item.time.toDate().year.toString()}",
+                        "Created at : ${formattedDate.day.toString()}-${formattedDate.month.toString()}-${formattedDate.year.toString()}",
                         style: GoogleFonts.aBeeZee(
                             color: Theme.of(context).colorScheme.onBackground,
                             fontSize: 10,

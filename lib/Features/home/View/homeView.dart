@@ -21,18 +21,19 @@ class HomeView extends ConsumerStatefulWidget {
 }
 
 class _HomeViewState extends ConsumerState<HomeView> {
-  List<AllTasksModel> _lists = [];
+  List<List<Tasks>> _lists = [];
   String? dateTime;
 
   @override
   void initState() {
     super.initState();
 
-    getAllTaskList();
-    _lists = List.generate(TaskStatusEnum.values.length, (outerIndex) {
-      return AllTasksModel(children: allTaskList);
+    //  getAllTaskList();
+    _lists = List.generate(3, (outerIndex) {
+      return allTaskList;
     });
 
+    print(_lists);
     dateTime = DateFormat.yMMMM().format(DateTime.now());
   }
 
@@ -139,8 +140,8 @@ class _HomeViewState extends ConsumerState<HomeView> {
   _onItemReorder(
       int oldItemIndex, int oldListIndex, int newItemIndex, int newListIndex) {
     setState(() {
-      var movedItem = _lists[oldListIndex].children.removeAt(oldItemIndex);
-      _lists[newListIndex].children.insert(newItemIndex, movedItem);
+      var movedItem = _lists[oldListIndex].removeAt(oldItemIndex);
+      _lists[newListIndex].insert(newItemIndex, movedItem);
     });
   }
 
@@ -151,13 +152,13 @@ class _HomeViewState extends ConsumerState<HomeView> {
     });
   }
 
-  getAllTaskList() {
-    final allTasks = ref.read(allTaskListProvider.stream);
-    allTasks.forEach((element) {
-      for (var allTaskData in element) {
-        allTaskList.add(allTaskData);
-        setState(() {});
-      }
-    });
-  }
+  // getAllTaskList() {
+  //   final allTasks = ref.read(allTaskListProvider.stream);
+  //   allTasks.forEach((element) {
+  //     for (var allTaskData in element) {
+  //       allTaskList.add(allTaskData);
+  //       setState(() {});
+  //     }
+  //   });
+  // }
 }
