@@ -13,6 +13,11 @@ final timeUpdateProvider = Provider.family<bool, TimerModel>((ref, timer) {
       .updateTimer(timer.id, timer.hour, timer.min, timer.sec);
 });
 
+final statusUpdateProvider = Provider.family<bool, UpdateStatus>((ref, status) {
+  return HomeControllerImp(ref)
+      .updateStatus(status.id,status.status);
+});
+
 class HomeControllerImp extends HomeViewController {
   HomeControllerImp(this.ref);
   Ref ref;
@@ -36,6 +41,18 @@ class HomeControllerImp extends HomeViewController {
         .collection("Tasks")
         .doc(id)
         .update({"timeInHours": hour, "timeInMin": min, "timeInSec": sec})
+        .then((value) => true)
+        .onError((error, stackTrace) => false);
+    return true;
+  }
+
+  @override
+  bool updateStatus(String id, String status) {
+    final fire = ref.read(firebaseInstanceProvider).firestore;
+fire
+        .collection("Tasks")
+        .doc(id)
+        .update({"status": status})
         .then((value) => true)
         .onError((error, stackTrace) => false);
     return true;

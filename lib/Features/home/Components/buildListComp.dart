@@ -52,7 +52,7 @@ buildList(int outerIndex, List<Tasks> lists, BuildContext context) {
             ? todoList.length
             : outerIndex == 1 && inProgressList.isNotEmpty
                 ? inProgressList.length
-                : completeList.isNotEmpty
+                : outerIndex == 2 && completeList.isNotEmpty
                     ? completeList.length
                     : 0,
         (index) => buildItem(
@@ -60,7 +60,7 @@ buildList(int outerIndex, List<Tasks> lists, BuildContext context) {
                 ? todoList[index]
                 : outerIndex == 1 && inProgressList.isNotEmpty
                     ? inProgressList[index]
-                    : completeList.isNotEmpty
+                    : outerIndex == 2 && completeList.isNotEmpty
                         ? completeList[index]
                         : [] as Tasks,
             context,

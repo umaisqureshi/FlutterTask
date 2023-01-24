@@ -1,5 +1,6 @@
 import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertask/Constants/constants.dart';
 import 'package:fluttertask/Features/home/Controller/homeControllerImp.dart';
@@ -21,20 +22,28 @@ class HomeView extends ConsumerStatefulWidget {
 }
 
 class _HomeViewState extends ConsumerState<HomeView> {
-  List<List<Tasks>> _lists = [];
+  List<AllTasksModel> _lists = [];
   String? dateTime;
 
   @override
   void initState() {
     super.initState();
-
-    //  getAllTaskList();
+    getAllTaskList();
     _lists = List.generate(3, (outerIndex) {
-      return allTaskList;
+      return AllTasksModel(children: allTaskList);
     });
 
-    print(_lists);
     dateTime = DateFormat.yMMMM().format(DateTime.now());
+  }
+
+  getAllTaskList() {
+    final allTasks = ref.read(allTaskListProvider.stream);
+    allTasks.forEach((element) {
+      for (var allTaskData in element) {
+        allTaskList.add(allTaskData);
+        setState(() {});
+      }
+    });
   }
 
   List<Tasks> allTaskList = [];
@@ -116,7 +125,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                                           (index) =>
                                               buildList(index, data, context)),
                                       onItemReorder: _onItemReorder,
-                                      onListReorder: _onListReorder,
+                                      onListReorder: (int a, int b) {},
                                       axis: Axis.horizontal,
                                       listWidth: 330,
                                       listDraggingWidth: 300,
@@ -139,26 +148,26 @@ class _HomeViewState extends ConsumerState<HomeView> {
 
   _onItemReorder(
       int oldItemIndex, int oldListIndex, int newItemIndex, int newListIndex) {
+    Tasks? getId;
     setState(() {
-      var movedItem = _lists[oldListIndex].removeAt(oldItemIndex);
-      _lists[newListIndex].insert(newItemIndex, movedItem);
+      var movedItem = _lists[oldListIndex].children.removeAt(oldItemIndex);
+      _lists[newListIndex].children.insert(newItemIndex, movedItem);
+      getId = movedItem;
     });
+    ref.read(statusUpdateProvider(UpdateStatus(
+        status: newListIndex == 0
+            ? "Todo"
+            : newListIndex == 1
+                ? "In Progress"
+                : "Complete",
+        id: getId!.id)));
   }
 
-  _onListReorder(int oldListIndex, int newListIndex) {
-    setState(() {
-      var movedList = _lists.removeAt(oldListIndex);
-      _lists.insert(newListIndex, movedList);
-    });
-  }
-
-  // getAllTaskList() {
-  //   final allTasks = ref.read(allTaskListProvider.stream);
-  //   allTasks.forEach((element) {
-  //     for (var allTaskData in element) {
-  //       allTaskList.add(allTaskData);
-  //       setState(() {});
-  //     }
+  // _onListReorder(int oldListIndex, int newListIndex) {
+  //   setState(() {
+  //     var movedList = _lists.removeAt(oldListIndex);
+  //     _lists.insert(newListIndex, movedList);
   //   });
   // }
+
 }

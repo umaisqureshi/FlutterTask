@@ -8,8 +8,6 @@ class AllTasksModel {
   AllTasksModel({required this.children});
 }
 
-
-
 class Tasks {
   String name;
   String description;
@@ -73,6 +71,7 @@ class Tasks {
   factory Tasks.fromJson(String source) =>
       Tasks.fromMap(json.decode(source) as Map<String, dynamic>);
 }
+
 class TimerModel {
   int hour;
   int min;
@@ -83,5 +82,14 @@ class TimerModel {
     required this.min,
     required this.sec,
     required this.id,
+  });
+}
+
+class UpdateStatus {
+  String id;
+  String status;
+  UpdateStatus({
+    required this.status,
+    required this.id
   });
 }

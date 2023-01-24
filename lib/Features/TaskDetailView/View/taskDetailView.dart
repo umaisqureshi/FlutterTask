@@ -146,7 +146,10 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
                                       timeInSec: widget.task.timeInSec,
                                       project: projectName.text,
                                       isCompleted: widget.task.isCompleted,
-                                      status: ref.read(statusValueProvider),
+                                      status:
+                                          ref.read(statusValueProvider) == ""
+                                              ? widget.task.status
+                                              : ref.read(statusValueProvider),
                                       createdAt: widget.task.createdAt)));
                                   setState(() {
                                     editable = false;
