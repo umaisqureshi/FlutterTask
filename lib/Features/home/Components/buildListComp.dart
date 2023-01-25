@@ -5,25 +5,15 @@ import '../model/tasksModel.dart';
 import 'buildItemComp.dart';
 
 buildList(int outerIndex, List<Tasks> lists, BuildContext context) {
-  List<Tasks> innerList = lists;
-
   List<Tasks> completeList = [];
   List<Tasks> todoList = [];
   List<Tasks> inProgressList = [];
 
-  for (var complete
-      in innerList.where((element) => element.status == "Complete")) {
-    completeList.add(complete);
-  }
-
-  for (var todo in innerList.where((element) => element.status == "Todo")) {
-    todoList.add(todo);
-  }
-
-  for (var inProgress
-      in innerList.where((element) => element.status == "In Progress")) {
-    inProgressList.add(inProgress);
-  }
+  completeList.addAll(lists.where((element) => element.status == "Complete"));
+  inProgressList
+      .addAll(lists.where((element) => element.status == "In Progress"));
+  todoList.addAll(lists.where((element) => element.status == "Todo"));
+  
   return DragAndDropList(
     header: Row(
       children: <Widget>[
