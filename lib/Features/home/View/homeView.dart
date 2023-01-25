@@ -1,4 +1,3 @@
-
 import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -126,8 +125,10 @@ class _HomeViewState extends ConsumerState<HomeView> {
                                     return DragAndDropLists(
                                       children: List.generate(
                                           _lists.length,
-                                          (index) =>
-                                              buildList(index, data, context)),
+                                          (index) => buildList(
+                                              index,
+                                              AllTasksModel(children: data),
+                                              context)),
                                       onItemReorder: _onItemReorder,
                                       onListReorder: (int a, int b) {},
                                       axis: Axis.horizontal,

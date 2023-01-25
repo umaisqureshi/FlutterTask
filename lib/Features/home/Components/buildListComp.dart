@@ -4,21 +4,24 @@ import 'package:flutter/material.dart';
 import '../model/tasksModel.dart';
 import 'buildItemComp.dart';
 
-buildList(int outerIndex, List<Tasks> lists, BuildContext context) {
+buildList(int outerIndex, AllTasksModel lists, BuildContext context) {
+  List<Tasks> innerList = lists.children;
+
   List<Tasks> completeList = [];
   List<Tasks> todoList = [];
   List<Tasks> inProgressList = [];
 
-  for (var complete in lists.where((element) => element.status == "Complete")) {
+  for (var complete
+      in innerList.where((element) => element.status == "Complete")) {
     completeList.add(complete);
   }
 
-  for (var todo in lists.where((element) => element.status == "Todo")) {
+  for (var todo in innerList.where((element) => element.status == "Todo")) {
     todoList.add(todo);
   }
 
   for (var inProgress
-      in lists.where((element) => element.status == "In Progress")) {
+      in innerList.where((element) => element.status == "In Progress")) {
     inProgressList.add(inProgress);
   }
   return DragAndDropList(
@@ -48,6 +51,7 @@ buildList(int outerIndex, List<Tasks> lists, BuildContext context) {
       ],
     ),
     children: List.generate(
+        // innerList.length,
         outerIndex == 0 && todoList.isNotEmpty
             ? todoList.length
             : outerIndex == 1 && inProgressList.isNotEmpty
