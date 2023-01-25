@@ -30,11 +30,8 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    print(widget.task.createdAt);
     DateTime formattedDate =
         DateTime.fromMillisecondsSinceEpoch(widget.task.createdAt);
-    print(formattedDate);
-    print(DateTime.now());
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
