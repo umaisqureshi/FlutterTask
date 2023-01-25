@@ -1,3 +1,4 @@
+
 import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -89,7 +90,10 @@ class _HomeViewState extends ConsumerState<HomeView> {
                       height: 20,
                     ),
                     ref.watch(allTaskListProvider).when(
-                          data: (data) => homeMiddleWidget(data, context),
+                          data: (data) => homeMiddleWidget(
+                            data,
+                            context,
+                          ),
                           error: (error, stackTrace) => Text(error.toString()),
                           loading: () => progressIndicator(context),
                         ),
@@ -148,26 +152,18 @@ class _HomeViewState extends ConsumerState<HomeView> {
 
   _onItemReorder(
       int oldItemIndex, int oldListIndex, int newItemIndex, int newListIndex) {
-    Tasks? getId;
     setState(() {
       var movedItem = _lists[oldListIndex].children.removeAt(oldItemIndex);
       _lists[newListIndex].children.insert(newItemIndex, movedItem);
-      getId = movedItem;
     });
+    String getId = _lists[oldListIndex].children[oldItemIndex].id;
+    debugPrint(getId);
     ref.read(statusUpdateProvider(UpdateStatus(
         status: newListIndex == 0
             ? "Todo"
             : newListIndex == 1
                 ? "In Progress"
                 : "Complete",
-        id: getId!.id)));
+        id: getId)));
   }
-
-  // _onListReorder(int oldListIndex, int newListIndex) {
-  //   setState(() {
-  //     var movedList = _lists.removeAt(oldListIndex);
-  //     _lists.insert(newListIndex, movedList);
-  //   });
-  // }
-
 }

@@ -33,6 +33,7 @@ class CreateTaskControllerImp extends CreateTaskController {
         "isComplete": false,
         "createdAt": DateTime.now().millisecondsSinceEpoch
       }).then((value) {
+
         collectionRef.doc(value.id).update({"id": value.id});
       });
       return true;

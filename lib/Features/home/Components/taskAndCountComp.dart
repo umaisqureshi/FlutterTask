@@ -1,9 +1,10 @@
-
 import 'package:flutter/material.dart';
+import 'package:fluttertask/Widgets/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-Widget taskAndCountWidget(int total, int completed, double percentage) {
+Widget taskAndCountWidget(
+    int total, int completed, double percentage, VoidCallback onPress) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Row(
@@ -23,7 +24,7 @@ Widget taskAndCountWidget(int total, int completed, double percentage) {
                   fontWeight: FontWeight.bold),
             ),
             const SizedBox(
-              height: 10,
+              height: 5,
             ),
             Text(
               "Almost Done",
@@ -41,7 +42,20 @@ Widget taskAndCountWidget(int total, int completed, double percentage) {
                   color: Colors.white,
                   fontSize: 12,
                   fontWeight: FontWeight.w400),
-            )
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            ElevatedButton(
+                onPressed: onPress,
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                child: Text(
+                  "Export Csv",
+                  style: GoogleFonts.aBeeZee(
+                      color: Colors.teal,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400),
+                )),
           ],
         ),
         const SizedBox(
