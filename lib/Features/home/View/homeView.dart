@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -24,29 +25,26 @@ class HomeView extends ConsumerStatefulWidget {
 class _HomeViewState extends ConsumerState<HomeView> {
   List<AllTasksModel> _lists = [];
   String? dateTime;
+  List<Tasks> allTaskList = [];
 
   @override
   void initState() {
     super.initState();
     getAllTaskList();
-    _lists = List.generate(3, (outerIndex) {
-      return AllTasksModel(children: allTaskList);
-    });
 
     dateTime = DateFormat.yMMMM().format(DateTime.now());
   }
 
   getAllTaskList() {
-    final allTasks = ref.read(allTaskListProvider.stream);
-    allTasks.forEach((element) {
-      for (var allTaskData in element) {
-        allTaskList.add(allTaskData);
-        setState(() {});
-      }
+    ref.read(allTaskListProvider.future).then((value) {
+      allTaskList.addAll(value);
+      debugPrint(allTaskList.length.toString());
+      _lists = List.generate(3, (outerIndex) {
+        return AllTasksModel(children: allTaskList);
+      });
+      setState(() {});
     });
   }
-
-  List<Tasks> allTaskList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -120,27 +118,19 @@ class _HomeViewState extends ConsumerState<HomeView> {
                             ),
                           ),
                           Expanded(
-                              child: ref.watch(allTaskListProvider).when(
-                                  data: (data) {
-                                    return DragAndDropLists(
-                                      children: List.generate(
-                                          _lists.length,
-                                          (index) => buildList(
-                                              index,
-                                              AllTasksModel(children: data),
-                                              context)),
-                                      onItemReorder: _onItemReorder,
-                                      onListReorder: (int a, int b) {},
-                                      axis: Axis.horizontal,
-                                      listWidth: 330,
-                                      listDraggingWidth: 300,
-                                      listPadding: const EdgeInsets.all(12.0),
-                                    );
-                                  },
-                                  error: ((error, stackTrace) {
-                                    return Text(error.toString());
-                                  }),
-                                  loading: () => progressIndicator(context))),
+                            child: DragAndDropLists(
+                              children: List.generate(
+                                  _lists.length,
+                                  (index) => buildList(
+                                      index, _lists[index].children, context)),
+                              onItemReorder: _onItemReorder,
+                              onListReorder: _onListReorder,
+                              axis: Axis.horizontal,
+                              listWidth: 330,
+                              listDraggingWidth: 300,
+                              listPadding: const EdgeInsets.all(12.0),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -157,14 +147,19 @@ class _HomeViewState extends ConsumerState<HomeView> {
       var movedItem = _lists[oldListIndex].children.removeAt(oldItemIndex);
       _lists[newListIndex].children.insert(newItemIndex, movedItem);
     });
-    String getId = _lists[oldListIndex].children[oldItemIndex].id;
-    debugPrint(getId);
-    ref.read(statusUpdateProvider(UpdateStatus(
-        status: newListIndex == 0
-            ? "Todo"
-            : newListIndex == 1
-                ? "In Progress"
-                : "Complete",
-        id: getId)));
+    // ref.read(statusUpdateProvider(UpdateStatus(
+    //     status: newListIndex == 0
+    //         ? "Todo"
+    //         : newListIndex == 1
+    //             ? "In Progress"
+    //             : "Complete",
+    //     id: getId)));
+  }
+
+  _onListReorder(int oldListIndex, int newListIndex) {
+    setState(() {
+      var movedList = _lists.removeAt(oldListIndex);
+      _lists.insert(newListIndex, movedList);
+    });
   }
 }

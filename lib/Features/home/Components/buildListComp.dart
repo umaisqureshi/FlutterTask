@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '../model/tasksModel.dart';
 import 'buildItemComp.dart';
 
-buildList(int outerIndex, AllTasksModel lists, BuildContext context) {
-  List<Tasks> innerList = lists.children;
+buildList(int outerIndex, List<Tasks> lists, BuildContext context) {
+  List<Tasks> innerList = lists;
 
   List<Tasks> completeList = [];
   List<Tasks> todoList = [];

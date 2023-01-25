@@ -4,7 +4,7 @@ import 'package:fluttertask/Features/home/model/tasksModel.dart';
 
 import '../../../Providers/firebaseProvider.dart';
 
-final allTaskListProvider = StreamProvider<List<Tasks>>((ref) {
+final allTaskListProvider = FutureProvider<List<Tasks>>((ref) {
   return HomeControllerImp(ref).getAllTaskList();
 });
 
@@ -22,9 +22,10 @@ class HomeControllerImp extends HomeViewController {
   Ref ref;
 
   @override
-  Stream<List<Tasks>> getAllTaskList() {
+  Future<List<Tasks>> getAllTaskList() {
     final fire = ref.read(firebaseInstanceProvider).firestore;
-    return fire.collection("Tasks").snapshots().map((event) {
+
+    return fire.collection("Tasks").get().then((event) {
       List<Tasks> allTaskList = [];
       for (var doc in event.docs) {
         allTaskList.add(Tasks.fromMap(doc.data()));
