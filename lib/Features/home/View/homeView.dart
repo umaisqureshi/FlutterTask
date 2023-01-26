@@ -92,102 +92,104 @@ class HomeViewState extends ConsumerState<HomeView> {
       groupBackgroundColor: Theme.of(context).backgroundColor,
     );
 
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
-        elevation: 20,
-        hoverColor: Theme.of(context).primaryColor,
-        hoverElevation: 50,
-        shape: const StadiumBorder(),
-        child: Icon(
-          Icons.add,
-          color: Theme.of(context).colorScheme.onBackground,
+    return SafeArea(
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
+          elevation: 20,
+          hoverColor: Theme.of(context).primaryColor,
+          hoverElevation: 50,
+          shape: const StadiumBorder(),
+          child: Icon(
+            Icons.add,
+            color: Theme.of(context).colorScheme.onBackground,
+          ),
+          onPressed: () {
+            context.push("/CREATETASK");
+          },
         ),
-        onPressed: () {
-          context.push("/CREATETASK");
-        },
-      ),
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: ref.watch(allTaskListProvider).when(
-          data: (data) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                homeTopWidget(context),
-                const SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 12.0),
-                  child: Text(
-                    dateTime!,
-                    style: GoogleFonts.aBeeZee(
-                        color: Theme.of(context).colorScheme.onBackground,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900),
+        backgroundColor: Theme.of(context).backgroundColor,
+        body: ref.watch(allTaskListProvider).when(
+            data: (data) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  homeTopWidget(context),
+                  const SizedBox(
+                    height: 20,
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                homeMiddleWidget(
-                  data.complete.length,
-                  data.complete.length +
-                      data.inProgress.length +
-                      data.todo.length,
-                  context,
-                  data,
-                ),
-                SizedBox(
-                  height: size.height * 0.03,
-                ),
-                Expanded(
-                  child: AppFlowyBoard(
-                      controller: controller,
-                      cardBuilder: (context, group, groupItem) {
-                        return AppFlowyGroupCard(
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).backgroundColor),
-                          key: ValueKey(groupItem.id),
-                          child: buildItem(groupItem, context),
-                        );
-                      },
-                      boardScrollController: boardController,
-                      headerBuilder: (context, columnData) {
-                        return AppFlowyGroupHeader(
-                          title: Container(
-                            height: 100,
-                            width: 300,
-                            color: Theme.of(context).primaryColor,
-                            child: Center(
-                              child: Text(
-                                columnData.id,
-                                style: GoogleFonts.aBeeZee(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onBackground,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 12.0),
+                    child: Text(
+                      dateTime!,
+                      style: GoogleFonts.aBeeZee(
+                          color: Theme.of(context).colorScheme.onBackground,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  homeMiddleWidget(
+                    data.complete.length,
+                    data.complete.length +
+                        data.inProgress.length +
+                        data.todo.length,
+                    context,
+                    data,
+                  ),
+                  SizedBox(
+                    height: size.height * 0.03,
+                  ),
+                  Expanded(
+                    child: AppFlowyBoard(
+                        controller: controller,
+                        cardBuilder: (context, group, groupItem) {
+                          return AppFlowyGroupCard(
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).backgroundColor),
+                            key: ValueKey(groupItem.id),
+                            child: buildItem(groupItem, context),
+                          );
+                        },
+                        boardScrollController: boardController,
+                        headerBuilder: (context, columnData) {
+                          return AppFlowyGroupHeader(
+                            title: Container(
+                              height: 100,
+                              width: 300,
+                              color: Theme.of(context).primaryColor,
+                              child: Center(
+                                child: Text(
+                                  columnData.id,
+                                  style: GoogleFonts.aBeeZee(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
-                          ),
-                          // addIcon: const Icon(Icons.add, size: 20),
-                          // moreIcon: const Icon(Icons.more_horiz, size: 20),
-                          height: 50,
+                            // addIcon: const Icon(Icons.add, size: 20),
+                            // moreIcon: const Icon(Icons.more_horiz, size: 20),
+                            height: 50,
 
-                          margin: config.groupItemPadding,
-                        );
-                      },
-                      groupConstraints: const BoxConstraints.tightFor(
-                        width: 350,
-                      ),
-                      config: config),
-                ),
-              ],
-            );
-          },
-          error: ((error, stackTrace) => Text(error.toString())),
-          loading: (() => progressIndicator(context))),
+                            margin: config.groupItemPadding,
+                          );
+                        },
+                        groupConstraints: const BoxConstraints.tightFor(
+                          width: 350,
+                        ),
+                        config: config),
+                  ),
+                ],
+              );
+            },
+            error: ((error, stackTrace) => Text(error.toString())),
+            loading: (() => progressIndicator(context))),
+      ),
     );
   }
 }
