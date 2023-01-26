@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertask/Theme/theme.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'Route/router.dart';
 import 'firebase_options.dart';
