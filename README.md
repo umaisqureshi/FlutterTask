@@ -53,9 +53,9 @@ Go to project root and execute the following command in console to run app:
 ## Folder Structure
 Here is the core folder structure which flutter provides.
 
-flutter-app/
-|- android
-|- build
-|- ios
-|- lib
-|- test
+fluttertask-app
+ - android
+ - build
+ - ios
+ - lib
+ - test
