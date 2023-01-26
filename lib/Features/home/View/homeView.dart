@@ -42,7 +42,7 @@ class HomeViewState extends ConsumerState<HomeView> {
           task = allTasks!.inProgress;
         }
         if (fromGroupId == "Complete") {
-          task = allTasks!.todo;
+          task = allTasks!.complete;
         }
 
         ref.read(statusUpdateProvider(
