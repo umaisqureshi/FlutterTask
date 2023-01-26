@@ -38,17 +38,17 @@ Go to project root and execute the following command in console to run app:
 
 ## Libraries & Packages Used
 
-  google_fonts
-  flutter_riverpod
-  firebase_core
-  go_router
-  intl
-  percent_indicator
-  cloud_firestore
-  csv
-  appflowy_board
-  path_provider
-  permission_handler
+  - google_fonts
+  - flutter_riverpod
+  - firebase_core
+  - go_router
+  - intl
+  - percent_indicator
+  - cloud_firestore
+  - csv
+  - appflowy_board
+  - path_provider
+  - permission_handler
 
 ## Folder Structure
 Here is the core folder structure which flutter provides.
