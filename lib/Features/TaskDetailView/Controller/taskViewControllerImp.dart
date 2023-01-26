@@ -4,15 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertask/Features/TaskDetailView/Controller/taskViewController.dart';
 import 'package:fluttertask/Features/home/model/tasksModel.dart';
 
-import '../../../Providers/firebaseProvider.dart';
-
-final updateTasksProvider = Provider.family<bool, Tasks>((ref, task) {
-  return TaskViewControllerImp(ref: ref).updateTaskData(task);
-});
-
-final deleteTaskProvider = Provider.family<bool, String>((ref, id) {
-  return TaskViewControllerImp(ref: ref).deleteTaskData(id);
-});
+import '../../../Providers/provider.dart';
 
 class TaskViewControllerImp extends TaskViewController {
   Ref ref;

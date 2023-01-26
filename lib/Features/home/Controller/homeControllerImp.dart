@@ -2,20 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertask/Features/home/Controller/homeController.dart';
 import 'package:fluttertask/Features/home/model/tasksModel.dart';
 
-import '../../../Providers/firebaseProvider.dart';
-
-final allTaskListProvider = StreamProvider<AllTasksModel>((ref) {
-  return HomeControllerImp(ref).getAllTaskList();
-});
-
-final timeUpdateProvider = Provider.family<bool, TimerModel>((ref, timer) {
-  return HomeControllerImp(ref)
-      .updateTimer(timer.id, timer.hour, timer.min, timer.sec);
-});
-
-final statusUpdateProvider = Provider.family<bool, UpdateStatus>((ref, stat) {
-  return HomeControllerImp(ref).updateStatus(stat.id, stat.status);
-});
+import '../../../Providers/provider.dart';
 
 class HomeControllerImp extends HomeViewController {
   HomeControllerImp(this.ref);

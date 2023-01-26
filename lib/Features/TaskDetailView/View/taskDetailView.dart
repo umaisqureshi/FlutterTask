@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertask/Features/TaskDetailView/Component/statusChangeComp.dart';
-import 'package:fluttertask/Features/TaskDetailView/Controller/taskViewControllerImp.dart';
 import 'package:fluttertask/Features/home/model/tasksModel.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
+import '../../../Providers/provider.dart';
 import '../../../Widgets/widgets.dart';
 import '../Component/taskDetailedBottomComp.dart';
 

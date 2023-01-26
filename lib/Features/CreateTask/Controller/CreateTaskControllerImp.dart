@@ -3,12 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Providers/firebaseProvider.dart';
+import '../../../Providers/provider.dart';
 import 'createTaskController.dart';
 
-final createTaskControllerProvider = Provider((ref) {
-  return CreateTaskControllerImp(ref);
-});
+
 
 class CreateTaskControllerImp extends CreateTaskController {
   CreateTaskControllerImp(this.ref);
