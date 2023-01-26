@@ -92,7 +92,7 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
                               widget.task.assignee,
                               context,
                               size,
-                              editable,
+                              false,
                               assigneeName,
                               1,
                               20),

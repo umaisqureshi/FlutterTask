@@ -173,7 +173,7 @@ showSnackBar(BuildContext context, String text) {
     SnackBar(
       behavior: SnackBarBehavior.floating,
       margin: const EdgeInsets.symmetric(vertical: 80, horizontal: 40),
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).primaryColor,
       shape: const StadiumBorder(),
       elevation: 30,
       padding: const EdgeInsets.all(20),

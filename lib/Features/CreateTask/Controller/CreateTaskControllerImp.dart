@@ -26,7 +26,7 @@ class CreateTaskControllerImp extends CreateTaskController {
         "timeInMin": 0,
         "timeInSec": 0,
         "completeAt": 0,
-        "assignee": assignee,
+        "assignee": "Umais Qureshi",
         "isComplete": false,
         "createdAt": DateTime.now().millisecondsSinceEpoch
       }).then((value) {
