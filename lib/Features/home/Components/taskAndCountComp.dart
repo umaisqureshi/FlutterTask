@@ -48,7 +48,9 @@ Widget taskAndCountWidget(int total, int completed, double percentage,
             ),
             ElevatedButton(
                 onPressed: onPress,
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        Theme.of(context).colorScheme.onBackground),
                 child: Text(
                   "Export Csv",
                   style: GoogleFonts.aBeeZee(

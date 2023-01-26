@@ -74,7 +74,7 @@ class SplashScreenView extends StatelessWidget {
                   child: Center(
                       child: raisedTextButton(() {
                 context.go("/HOME");
-              }, "Get Started", Colors.teal)))
+              }, "Get Started", Colors.teal,context)))
             ],
           ),
         ),

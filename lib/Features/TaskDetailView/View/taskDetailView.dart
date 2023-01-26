@@ -145,28 +145,33 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
                                 ),
                           editable
                               ? raisedTextButton(() {
-                                  ref.read(updateTasksProvider(Tasks(
-                                      name: taskName.text,
-                                      description: descriptionName.text,
-                                      sid: widget.task.id,
-                                      timeInHour: widget.task.timeInHour,
-                                      timeInMin: widget.task.timeInMin,
-                                      assignee: assigneeName.text,
-                                      timeInSec: widget.task.timeInSec,
-                                      project: projectName.text,
-                                      isCompleted:
-                                         false,
-                                      completeAt: 0,
-                                      status:
-                                          ref.read(statusValueProvider) == ""
+                                  bool updated = ref.read(updateTasksProvider(
+                                      Tasks(
+                                          name: taskName.text,
+                                          description: descriptionName.text,
+                                          sid: widget.task.id,
+                                          timeInHour: widget.task.timeInHour,
+                                          timeInMin: widget.task.timeInMin,
+                                          assignee: assigneeName.text,
+                                          timeInSec: widget.task.timeInSec,
+                                          project: projectName.text,
+                                          isCompleted: false,
+                                          completeAt: 0,
+                                          status: ref.read(
+                                                      statusValueProvider) ==
+                                                  ""
                                               ? widget.task.status
                                               : ref.read(statusValueProvider),
-                                      createdAt: widget.task.createdAt)));
+                                          createdAt: widget.task.createdAt)));
                                   setState(() {
                                     editable = false;
                                   });
-                                  context.push("/HOME");
-                                }, " Save ", Theme.of(context).primaryColor)
+                                  context.pop();
+                                  if (updated) {
+                                    showSnackBar(context, "Task Updated");
+                                  }
+                                }, " Save ", Theme.of(context).primaryColor,
+                                  context)
                               : TaskDetailedBottomComp(
                                   size: size,
                                   widget: widget,

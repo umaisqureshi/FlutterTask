@@ -93,14 +93,14 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
             Container(
               height: 30,
               width: 100,
-              decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              decoration: BoxDecoration(
+                  color: Theme.of(context).backgroundColor,
+                  borderRadius: const BorderRadius.all(Radius.circular(10))),
               child: Center(
                 child: Text(
                   formatToHourMinSec(widget.seconds),
                   style: GoogleFonts.aBeeZee(
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).colorScheme.onBackground,
                       fontSize: 15,
                       fontWeight: FontWeight.w600),
                 ),

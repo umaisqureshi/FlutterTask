@@ -22,6 +22,11 @@ buildItem(AppFlowyGroupItem item, BuildContext context) {
       },
       child: Card(
         elevation: 5,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(30),
+          ),
+        ),
         color: Theme.of(context).backgroundColor,
         child: Container(
             key: ValueKey(item.id),
@@ -40,18 +45,18 @@ buildItem(AppFlowyGroupItem item, BuildContext context) {
                   Container(
                     height: 50,
                     width: 50,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(10),
                           topRight: Radius.circular(10),
                           bottomLeft: Radius.circular(30),
                           bottomRight: Radius.circular(30)),
-                      color: Colors.white,
+                      color: Theme.of(context).backgroundColor,
                     ),
                     child: Center(
                       child: Icon(
                         Icons.checklist,
-                        color: Theme.of(context).backgroundColor,
+                        color: Theme.of(context).colorScheme.onBackground,
                       ),
                     ),
                   ),
@@ -113,15 +118,17 @@ buildItem(AppFlowyGroupItem item, BuildContext context) {
                           ? Container(
                               height: 30,
                               width: 100,
-                              decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).backgroundColor,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(10))),
                               child: Center(
                                 child: Text(
                                   "${item.timeInHour} : ${item.timeInMin} : ${item.timeInSec}",
                                   style: GoogleFonts.aBeeZee(
-                                      color: Theme.of(context).primaryColor,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600),
                                 ),

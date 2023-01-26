@@ -134,13 +134,18 @@ class _CreateTaskViewState extends ConsumerState<CreateTaskView> {
                                 descriptionController.text,
                                 projectController.text,
                                 "Umais Qureshi");
+
                         if (added) {
                           // ignore: use_build_context_synchronously
-                          showSnackBar(context, "Task Added Successfully");
                           context.pop();
+                          // ignore: use_build_context_synchronously
+                          showSnackBar(context, "Task Added Successfully");
                         }
+                      } else {
+                        showSnackBar(
+                            context, "Please fill all fields to create task");
                       }
-                    }, "Create", Theme.of(context).primaryColor)),
+                    }, "Create", Colors.teal, context)),
                   ],
                 ),
               ),

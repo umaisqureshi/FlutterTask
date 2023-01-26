@@ -22,8 +22,9 @@ class TaskDetailedBottomComp extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        raisedTextButton(onEdit, "  Edit  ", Theme.of(context).primaryColor),
-        raisedTextButton(onDelete, "Delete", Colors.red)
+        raisedTextButton(
+            onEdit, "  Edit  ", Theme.of(context).primaryColor, context),
+        raisedTextButton(onDelete, "Delete", Colors.teal, context)
       ],
     );
   }

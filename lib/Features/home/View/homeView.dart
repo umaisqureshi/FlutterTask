@@ -99,7 +99,10 @@ class HomeViewState extends ConsumerState<HomeView> {
         hoverColor: Theme.of(context).primaryColor,
         hoverElevation: 50,
         shape: const StadiumBorder(),
-        child: const Icon(Icons.add),
+        child: Icon(
+          Icons.add,
+          color: Theme.of(context).colorScheme.onBackground,
+        ),
         onPressed: () {
           context.push("/CREATETASK");
         },
