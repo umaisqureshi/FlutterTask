@@ -1,17 +1,26 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:appflowy_board/appflowy_board.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
+
 class AllTasksModel {
-  List<Tasks> children;
-  AllTasksModel({required this.children});
+  List<Tasks> todo;
+  List<Tasks> inProgress;
+  List<Tasks> complete;
+  AllTasksModel({
+    required this.todo,
+    required this.inProgress,
+    required this.complete,
+  });
 }
 
-class Tasks {
+class Tasks extends AppFlowyGroupItem {
   String name;
   String description;
-  String id;
+  String sid;
   String status;
   String project;
   int timeInHour;
@@ -23,7 +32,7 @@ class Tasks {
   Tasks({
     required this.name,
     required this.description,
-    required this.id,
+    required this.sid,
     required this.timeInHour,
     required this.timeInMin,
     required this.assignee,
@@ -38,7 +47,7 @@ class Tasks {
     return <String, dynamic>{
       'name': name,
       'description': description,
-      'id': id,
+      'id': sid,
       'status': status,
       'project': project,
       'assignee': assignee,
@@ -55,7 +64,7 @@ class Tasks {
       name: map['name'] as String,
       project: map['project'] as String,
       description: map['description'] as String,
-      id: map['id'] as String,
+      sid: map['id'] as String,
       status: map['status'] as String,
       assignee: map['assignee'] as String,
       createdAt: map['createdAt'] as int,
@@ -70,6 +79,9 @@ class Tasks {
 
   factory Tasks.fromJson(String source) =>
       Tasks.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String get id => sid;
 }
 
 class TimerModel {
@@ -88,8 +100,5 @@ class TimerModel {
 class UpdateStatus {
   String id;
   String status;
-  UpdateStatus({
-    required this.status,
-    required this.id
-  });
+  UpdateStatus({required this.status, required this.id});
 }

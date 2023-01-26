@@ -1,25 +1,25 @@
-import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
+import 'package:appflowy_board/appflowy_board.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertask/Features/home/model/tasksModel.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 import 'timerComp.dart';
 
-buildItem(Tasks item, BuildContext context, Color color) {
-  double height = item.status == "In Progress" ? 110 : 100;
+buildItem(AppFlowyGroupItem item, BuildContext context) {
+  if (item is Tasks) {
+    double height = item.status == "In Progress" ? 110 : 100;
 
-  DateTime formattedDate =
-      DateTime.fromMillisecondsSinceEpoch(item.createdAt);
+    DateTime formattedDate =
+        DateTime.fromMillisecondsSinceEpoch(item.createdAt);
 
-  return DragAndDropItem(
-    child: GestureDetector(
+    return GestureDetector(
       onTap: () {
         context.push("/TASKVIEW", extra: item);
       },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
+      child: Card(
+        elevation: 5,
+        color: Theme.of(context).backgroundColor,
         child: Container(
             key: ValueKey(item.id),
             height: height,
@@ -28,9 +28,9 @@ buildItem(Tasks item, BuildContext context, Color color) {
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(30),
                 ),
-                color: color),
+                color: Theme.of(context).primaryColor),
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -48,7 +48,7 @@ buildItem(Tasks item, BuildContext context, Color color) {
                     child: Center(
                       child: Icon(
                         Icons.checklist,
-                        color: color,
+                        color: Theme.of(context).backgroundColor,
                       ),
                     ),
                   ),
@@ -126,6 +126,6 @@ buildItem(Tasks item, BuildContext context, Color color) {
               ),
             )),
       ),
-    ),
-  );
+    );
+  }
 }

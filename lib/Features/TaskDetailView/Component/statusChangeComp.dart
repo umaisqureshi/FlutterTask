@@ -7,6 +7,7 @@ final statusValueProvider = StateProvider<String>((ref) {
   return "";
 });
 
+// ignore: must_be_immutable
 class StatusChangeWidget extends ConsumerStatefulWidget {
   StatusChangeWidget({
     super.key,
@@ -21,7 +22,7 @@ class StatusChangeWidget extends ConsumerStatefulWidget {
 
 class _StatusChangeWidgetState extends ConsumerState<StatusChangeWidget> {
   List<String> tags = [
-    "Todo",
+    "To Do",
     "In Progress",
     "Complete",
   ];
@@ -35,10 +36,10 @@ class _StatusChangeWidgetState extends ConsumerState<StatusChangeWidget> {
         borderRadius: BorderRadius.circular(20),
         elevation: 4,
         style: GoogleFonts.aBeeZee(
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).colorScheme.onBackground,
             fontSize: 20,
             fontWeight: FontWeight.bold),
-        dropdownColor: Theme.of(context).backgroundColor,
+        dropdownColor: Theme.of(context).backgroundColor.withOpacity(0.9),
         value: widget.selectedStatus,
         onChanged: ((value) {
           widget.selectedStatus = value!;

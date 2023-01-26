@@ -31,9 +31,9 @@ class MyApp extends StatelessWidget {
       title: 'Task Tracking',
       themeMode: ThemeMode.system,
       theme: ThemeData(
-        primaryColor: Colors.teal,
+        primaryColor: Color.fromARGB(255, 30, 29, 29),
         appBarTheme: AppBarTheme(
-            backgroundColor: Colors.black,
+            backgroundColor: Color.fromARGB(255, 15, 15, 15),
             centerTitle: true,
             elevation: 0,
             titleTextStyle:

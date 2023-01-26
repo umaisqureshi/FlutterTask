@@ -47,7 +47,7 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
                   "Task Detail",
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.aBeeZee(
-                      color: Theme.of(context).primaryColor,
+                      color: Colors.teal,
                       fontSize: 25,
                       fontWeight: FontWeight.bold),
                 ),
@@ -58,13 +58,11 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
               Expanded(
                 child: Card(
                   elevation: 10,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
+                  color: Theme.of(context).primaryColor.withOpacity(0.9),
                   child: Container(
                     height: size.height,
                     decoration: BoxDecoration(
-                        color:
-                            Theme.of(context).backgroundColor.withOpacity(0.9),
+                        color: Theme.of(context).primaryColor.withOpacity(0.9),
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20),
@@ -136,7 +134,7 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
                                   ref.read(updateTasksProvider(Tasks(
                                       name: taskName.text,
                                       description: descriptionName.text,
-                                      id: widget.task.id,
+                                      sid: widget.task.id,
                                       timeInHour: widget.task.timeInHour,
                                       timeInMin: widget.task.timeInMin,
                                       assignee: assigneeName.text,
@@ -153,7 +151,7 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
                                   });
                                   context.push("/HOME");
                                 }, " Save ", Theme.of(context).primaryColor)
-                              : TaskDetailedTopComp(
+                              : TaskDetailedBottomComp(
                                   size: size,
                                   widget: widget,
                                   onEdit: () {

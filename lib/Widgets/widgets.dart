@@ -12,7 +12,7 @@ Widget raisedTextButton(VoidCallback onPress, String text, Color color) {
         backgroundColor: color,
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20)),
+        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30)),
     child: Text(
       text,
       style: GoogleFonts.aBeeZee(
@@ -92,7 +92,7 @@ Widget titleAndDetailedWidget(
             Text(
               title,
               style: GoogleFonts.aBeeZee(
-                  color: Theme.of(context).primaryColor,
+                  color: Colors.teal,
                   fontSize: 15,
                   fontWeight: FontWeight.bold),
             ),
@@ -155,7 +155,11 @@ showDialogBox(
             fontWeight: FontWeight.w500),
       ),
       actions: <Widget>[
-        raisedTextButton(onPress, "Delete", Theme.of(context).primaryColor),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: raisedTextButton(
+              onPress, "Delete", Theme.of(context).primaryColor),
+        ),
       ],
     ),
   );

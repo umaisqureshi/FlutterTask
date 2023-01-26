@@ -3,8 +3,8 @@ import 'package:fluttertask/Widgets/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-Widget taskAndCountWidget(
-    int total, int completed, double percentage, VoidCallback onPress) {
+Widget taskAndCountWidget(int total, int completed, double percentage,
+    VoidCallback onPress, BuildContext context) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Row(
@@ -19,7 +19,7 @@ Widget taskAndCountWidget(
             Text(
               "Daily Plan",
               style: GoogleFonts.aBeeZee(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onBackground,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
@@ -29,7 +29,7 @@ Widget taskAndCountWidget(
             Text(
               "Almost Done",
               style: GoogleFonts.aBeeZee(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onBackground,
                   fontSize: 20,
                   fontWeight: FontWeight.w600),
             ),
@@ -39,7 +39,7 @@ Widget taskAndCountWidget(
             Text(
               "$completed of ${total} completed",
               style: GoogleFonts.aBeeZee(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onBackground,
                   fontSize: 12,
                   fontWeight: FontWeight.w400),
             ),
@@ -52,7 +52,7 @@ Widget taskAndCountWidget(
                 child: Text(
                   "Export Csv",
                   style: GoogleFonts.aBeeZee(
-                      color: Colors.teal,
+                      color: Theme.of(context).primaryColor,
                       fontSize: 12,
                       fontWeight: FontWeight.w400),
                 )),
@@ -69,7 +69,9 @@ Widget taskAndCountWidget(
           center: Text(
             percentage.isNaN ? "0%" : "${percentage.floor()}%",
             style: GoogleFonts.aBeeZee(
-                color: Colors.white, fontSize: 12, fontWeight: FontWeight.w400),
+                color: Theme.of(context).colorScheme.onBackground,
+                fontSize: 12,
+                fontWeight: FontWeight.w400),
           ),
           progressColor: Colors.white,
           circularStrokeCap: CircularStrokeCap.round,

@@ -9,13 +9,10 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../model/tasksModel.dart';
 
-homeMiddleWidget(List<Tasks> allList, BuildContext context) {
-  List<Tasks> completeList = [];
-
-  for (var complete
-      in allList.where((element) => element.status == "Complete")) {
-    completeList.add(complete);
-  }
+homeMiddleWidget(
+    int complete, int all, BuildContext context, AllTasksModel tasks) {
+  List<Tasks> allList = [];
+  allList.addAll([...tasks.todo, ...tasks.complete, ...tasks.inProgress]);
 
   Future<bool> generateCsv(context) async {
     List<List<String>> csvData = [
@@ -53,7 +50,7 @@ homeMiddleWidget(List<Tasks> allList, BuildContext context) {
   }
 
   return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+    padding: const EdgeInsets.symmetric(horizontal: 20.0),
     child: Container(
       height: 180,
       width: double.infinity,
@@ -65,18 +62,15 @@ homeMiddleWidget(List<Tasks> allList, BuildContext context) {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            taskAndCountWidget(
-                allList.length,
-                completeList.length,
-                (completeList.length / allList.length * 100).isNaN
-                    ? 0.0
-                    : completeList.length / allList.length * 100, (() async {
+            taskAndCountWidget(all, complete,
+                (complete / all * 100).isNaN ? 0.0 : complete / all * 100,
+                (() async {
               bool csvCreated = await generateCsv(context);
               if (csvCreated) {
                 // ignore: use_build_context_synchronously
                 showSnackBar(context, "Csv created Successfully");
               }
-            })),
+            }), context),
           ],
         ),
       ),

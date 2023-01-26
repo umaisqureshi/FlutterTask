@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../Widgets/widgets.dart';
 import '../View/taskDetailView.dart';
 
-class TaskDetailedTopComp extends StatelessWidget {
-  const TaskDetailedTopComp(
+class TaskDetailedBottomComp extends StatelessWidget {
+  const TaskDetailedBottomComp(
       {Key? key,
       required this.size,
       required this.widget,
@@ -22,10 +22,7 @@ class TaskDetailedTopComp extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        raisedTextButton(onEdit, " Edit ", Theme.of(context).primaryColor),
-        const SizedBox(
-          width: 5,
-        ),
+        raisedTextButton(onEdit, "  Edit  ", Theme.of(context).primaryColor),
         raisedTextButton(onDelete, "Delete", Colors.red)
       ],
     );
