@@ -1,16 +1,61 @@
 # fluttertask
 
-A new Flutter project.
+Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+- First we need to download [Install Flutter SDK](https://docs.flutter.dev/get-started/install) and [Install Java SDK](https://www.oracle.com/java/technologies/downloads) in our system.
+- Set SDK PATHS IN Environmental variables
+- Install Flutter and Dart extension in your IDE
 
-A few resources to get you started if this is your first Flutter project:
+## How to Use
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Step 1:
+Download or clone this repo by using the link below:
+- [FlutterTask app](https://github.com/umaisqureshi/FlutterTask.git)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Step 2:
+Go to project root and execute the following command in console to get the required dependencies:
+- flutter pub get
+
+## Step 3:
+Go to project root and execute the following command in console to run app:
+- flutter run
+
+## FlutterTask Features:
+
+- Splash
+- Home
+- Create task
+- Delete task
+- Move task
+- Edit or Update task
+- Routing
+- Light and Dark Theme (According to Mobile own theme mode) 
+- Firebase Cloud Database
+- Custom Widgets
+- Flutter Riverpod (State Management)
+
+## Libraries & Packages Used
+
+  google_fonts
+  flutter_riverpod
+  firebase_core
+  go_router
+  intl
+  percent_indicator
+  cloud_firestore
+  csv
+  appflowy_board
+  path_provider
+  permission_handler
+
+## Folder Structure
+Here is the core folder structure which flutter provides.
+
+flutter-app/
+|- android
+|- build
+|- ios
+|- lib
+|- test
