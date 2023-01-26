@@ -4,8 +4,6 @@ import 'dart:convert';
 import 'package:appflowy_board/appflowy_board.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-
 class AllTasksModel {
   List<Tasks> todo;
   List<Tasks> inProgress;
@@ -28,20 +26,21 @@ class Tasks extends AppFlowyGroupItem {
   int timeInSec;
   bool isCompleted;
   String assignee;
+  int completeAt;
   int createdAt;
-  Tasks({
-    required this.name,
-    required this.description,
-    required this.sid,
-    required this.timeInHour,
-    required this.timeInMin,
-    required this.assignee,
-    required this.timeInSec,
-    required this.project,
-    required this.isCompleted,
-    required this.status,
-    required this.createdAt,
-  });
+  Tasks(
+      {required this.name,
+      required this.description,
+      required this.sid,
+      required this.timeInHour,
+      required this.timeInMin,
+      required this.assignee,
+      required this.timeInSec,
+      required this.project,
+      required this.isCompleted,
+      required this.status,
+      required this.createdAt,
+      required this.completeAt});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -55,7 +54,8 @@ class Tasks extends AppFlowyGroupItem {
       'timeInHour': timeInHour,
       'timeInSec': timeInSec,
       'timeInMin': timeInMin,
-      'isComplete': isCompleted
+      'isComplete': isCompleted,
+      'completeAt': completeAt
     };
   }
 
@@ -67,6 +67,7 @@ class Tasks extends AppFlowyGroupItem {
       sid: map['id'] as String,
       status: map['status'] as String,
       assignee: map['assignee'] as String,
+      completeAt: map['completeAt'] as int,
       createdAt: map['createdAt'] as int,
       timeInHour: map['timeInHour'] as int,
       timeInMin: map['timeInMin'] as int,
@@ -100,5 +101,7 @@ class TimerModel {
 class UpdateStatus {
   String id;
   String status;
-  UpdateStatus({required this.status, required this.id});
+  bool isComplete;
+  UpdateStatus(
+      {required this.status, required this.id, required this.isComplete});
 }

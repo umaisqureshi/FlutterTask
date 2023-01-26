@@ -16,7 +16,6 @@ class HomeControllerImp extends HomeViewController {
 
       for (var doc in event.docs) {
         allTaskList.add(Tasks.fromMap(doc.data()));
-
       }
       var todo =
           allTaskList.where((element) => element.status == "To Do").toList();
@@ -44,12 +43,17 @@ class HomeControllerImp extends HomeViewController {
   }
 
   @override
-  bool updateStatus(String id, String status) {
+  bool updateStatus(String id, String status, bool isComplete) {
     final fire = ref.read(firebaseInstanceProvider).firestore;
     fire
         .collection("Tasks")
         .doc(id)
-        .update({"status": status})
+        .update({
+          "status": status,
+          "isComplete": isComplete,
+          "completeAt":
+              isComplete ? DateTime.now().millisecondsSinceEpoch : 0
+        })
         .then((value) => true)
         .onError((error, stackTrace) => false);
     return true;

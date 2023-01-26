@@ -6,8 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../Providers/provider.dart';
 import 'createTaskController.dart';
 
-
-
 class CreateTaskControllerImp extends CreateTaskController {
   CreateTaskControllerImp(this.ref);
   final Ref ref;
@@ -27,6 +25,7 @@ class CreateTaskControllerImp extends CreateTaskController {
         "timeInHour": 0,
         "timeInMin": 0,
         "timeInSec": 0,
+        "completeAt": 0,
         "assignee": assignee,
         "isComplete": false,
         "createdAt": DateTime.now().millisecondsSinceEpoch

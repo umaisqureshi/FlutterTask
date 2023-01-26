@@ -49,6 +49,7 @@ Widget textFieldWidget(
     autofillHints: <String>[hint],
     maxLines: maxLine,
     onSubmitted: onPress,
+    cursorColor: Theme.of(context).colorScheme.onBackground,
     controller: controller,
     maxLength: length,
     inputFormatters: [
@@ -61,8 +62,9 @@ Widget textFieldWidget(
     decoration: inputDecorationTextField.copyWith(
         hintText: hint,
         counterText: "",
+        fillColor: Theme.of(context).backgroundColor,
         hintStyle: const TextStyle(
-          color: Colors.white24,
+          color: Colors.white38,
         )),
   );
 }

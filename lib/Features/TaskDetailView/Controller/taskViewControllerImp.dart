@@ -40,7 +40,10 @@ class TaskViewControllerImp extends TaskViewController {
           "timeInMin": task.timeInMin,
           "timeInSec": task.timeInSec,
           "assignee": task.assignee,
-          "isComplete": task.isCompleted,
+          "isComplete": task.status == "Complete" ? true : false,
+          "completeAt": task.status == "Complete"
+              ? DateTime.now().millisecondsSinceEpoch
+              : 0,
           "createdAt": task.createdAt
         })
         .then((value) => debugPrint("Task Updated"))

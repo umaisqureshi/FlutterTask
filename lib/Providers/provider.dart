@@ -26,7 +26,7 @@ final timeUpdateProvider = Provider.family<bool, TimerModel>((ref, timer) {
 });
 
 final statusUpdateProvider = Provider.family<bool, UpdateStatus>((ref, stat) {
-  return HomeControllerImp(ref).updateStatus(stat.id, stat.status);
+  return HomeControllerImp(ref).updateStatus(stat.id, stat.status, stat.isComplete);
 });
 
 final createTaskControllerProvider = Provider((ref) {

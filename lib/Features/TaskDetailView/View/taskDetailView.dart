@@ -29,8 +29,12 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     DateTime formattedDate =
         DateTime.fromMillisecondsSinceEpoch(widget.task.createdAt);
+    DateTime formattedCompleteDate =
+        DateTime.fromMillisecondsSinceEpoch(widget.task.completeAt);
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
@@ -103,6 +107,17 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
                               null,
                               0,
                               0),
+                          widget.task.isCompleted
+                              ? titleAndDetailedWidget(
+                                  "Complete at",
+                                  "${formattedCompleteDate.day.toString()}-${formattedCompleteDate.month.toString()}-${formattedCompleteDate.year.toString()}",
+                                  context,
+                                  size,
+                                  false,
+                                  null,
+                                  0,
+                                  0)
+                              : Container(),
                           titleAndDetailedWidget(
                               "Time Spend",
                               "${widget.task.timeInHour} : ${widget.task.timeInMin} : ${widget.task.timeInSec}",
@@ -139,7 +154,9 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
                                       assignee: assigneeName.text,
                                       timeInSec: widget.task.timeInSec,
                                       project: projectName.text,
-                                      isCompleted: widget.task.isCompleted,
+                                      isCompleted:
+                                         false,
+                                      completeAt: 0,
                                       status:
                                           ref.read(statusValueProvider) == ""
                                               ? widget.task.status

@@ -8,10 +8,13 @@ import 'timerComp.dart';
 
 buildItem(AppFlowyGroupItem item, BuildContext context) {
   if (item is Tasks) {
-    double height = item.status == "In Progress" ? 110 : 100;
+    double height =
+        (item.status == "In Progress" || item.status == "Complete") ? 110 : 100;
 
     DateTime formattedDate =
         DateTime.fromMillisecondsSinceEpoch(item.createdAt);
+    DateTime formattedCompletedDate =
+        DateTime.fromMillisecondsSinceEpoch(item.completeAt);
 
     return GestureDetector(
       onTap: () {
@@ -84,13 +87,25 @@ buildItem(AppFlowyGroupItem item, BuildContext context) {
                       const SizedBox(
                         height: 3,
                       ),
-                      Text(
-                        "Created at : ${formattedDate.day.toString()}-${formattedDate.month.toString()}-${formattedDate.year.toString()}",
-                        style: GoogleFonts.aBeeZee(
-                            color: Theme.of(context).colorScheme.onBackground,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400),
-                      ),
+                      item.isCompleted
+                          ? Text(
+                              "Complete at : ${formattedCompletedDate.day.toString()}-${formattedCompletedDate.month.toString()}-${formattedCompletedDate.year.toString()}",
+                              style: GoogleFonts.aBeeZee(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w400),
+                            )
+                          : Text(
+                              "Created at : ${formattedDate.day.toString()}-${formattedDate.month.toString()}-${formattedDate.year.toString()}",
+                              style: GoogleFonts.aBeeZee(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w400),
+                            ),
                       const SizedBox(
                         height: 10,
                       ),

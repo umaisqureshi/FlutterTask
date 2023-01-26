@@ -45,8 +45,10 @@ class HomeViewState extends ConsumerState<HomeView> {
           task = allTasks!.complete;
         }
 
-        ref.read(statusUpdateProvider(
-            UpdateStatus(status: toGroupId, id: task[fromIndex].id)));
+        ref.read(statusUpdateProvider(UpdateStatus(
+            status: toGroupId,
+            id: task[fromIndex].id,
+            isComplete: toGroupId == "Complete" ? true : false)));
       },
     );
     getAllTaskList();
