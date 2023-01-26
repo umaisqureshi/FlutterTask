@@ -5,7 +5,7 @@ Flutter project.
 ## Getting Started
 
 - First we need to download [Install Flutter SDK](https://docs.flutter.dev/get-started/install) and [Install Java SDK](https://www.oracle.com/java/technologies/downloads) in our system.
-- Set SDK PATHS IN Environmental variables
+- Set Sdk Paths in Environmental variables
 - Install Flutter and Dart extension in your IDE
 
 ## How to Use
