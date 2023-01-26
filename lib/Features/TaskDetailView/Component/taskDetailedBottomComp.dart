@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../Widgets/widgets.dart';
+import '../../../Widgets/raisedButtonWidget.dart';
+import '../../../Widgets/showSnackbarWidget.dart';
 import '../View/taskDetailView.dart';
 
 class TaskDetailedBottomComp extends StatelessWidget {

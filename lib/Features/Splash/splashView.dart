@@ -3,7 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../Constants/constants.dart';
-import '../../Widgets/widgets.dart';
+import '../../Widgets/imageWidget.dart';
+import '../../Widgets/raisedButtonWidget.dart';
+import '../../Widgets/showSnackbarWidget.dart';
 
 class SplashScreenView extends StatelessWidget {
   const SplashScreenView({super.key});

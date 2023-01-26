@@ -4,9 +4,11 @@ import 'package:fluttertask/Features/TaskDetailView/Component/statusChangeComp.d
 import 'package:fluttertask/Features/home/model/tasksModel.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../Providers/provider.dart';
-import '../../../Widgets/widgets.dart';
+import '../../../Widgets/raisedButtonWidget.dart';
+import '../../../Widgets/showDialogBox.dart';
+import '../../../Widgets/titleAndDetailedWidget.dart';
+import '../../../Widgets/showSnackbarWidget.dart';
 import '../Component/taskDetailedBottomComp.dart';
 
 class TaskDetailedView extends ConsumerStatefulWidget {

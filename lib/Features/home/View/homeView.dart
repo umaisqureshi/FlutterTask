@@ -1,11 +1,12 @@
 import 'package:appflowy_board/appflowy_board.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertask/Widgets/widgets.dart';
+import 'package:fluttertask/Widgets/showSnackbarWidget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../../../Providers/provider.dart';
+import '../../../Widgets/imageWidget.dart';
 import '../Components/buildItemComp.dart';
 import '../Components/homeMiddleComp.dart';
 import '../Components/homeTopComp.dart';
