@@ -10,7 +10,9 @@ class HomeControllerImp extends HomeViewController {
 
   @override
   Stream<AllTasksModel> getAllTaskList() {
+
     final fire = ref.read(firebaseInstanceProvider).firestore;
+    
     return fire.collection("Tasks").snapshots().map((event) {
       List<Tasks> allTaskList = [];
 

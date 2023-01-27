@@ -47,10 +47,10 @@ dependencies:
   appflowy_board: ^0.0.9
   path_provider: ^2.0.2
   permission_handler: ^7.1.0
+  fake_cloud_firestore: ^2.0.1
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -58,6 +58,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  test:
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
