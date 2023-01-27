@@ -11,9 +11,7 @@ void main() {
       "description": "Description",
       "status": "To Do",
       "id": "67777",
-      "timeInHour": 0,
-      "timeInMin": 0,
-      "timeInSec": 0,
+      "time": 0,
       "completeAt": 0,
       "assignee": "Umais Qureshi",
       "isComplete": false,
@@ -101,14 +99,14 @@ void main() {
                   .collection(collectionPath)
                   .doc(documentPath);
 
-          await documentReference.set(data);
+          await documentReference.set({"name": "Task 2"});
 
-          const Map<String, dynamic> dataUpdate = data;
+          const Map<String, dynamic> dataUpdate = {"name": "Task 2"};
 
           await fakeFirebaseFirestore!
               .collection(collectionPath)
               .doc(documentPath)
-              .update(data);
+              .update({"name": "Task 2"});
 
           final DocumentSnapshot<Map<String, dynamic>> actualDocumentSnapshot =
               await documentReference.get();
