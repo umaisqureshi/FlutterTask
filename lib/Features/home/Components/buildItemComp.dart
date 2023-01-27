@@ -124,7 +124,7 @@ buildItem(AppFlowyGroupItem item, BuildContext context) {
                                       Radius.circular(10))),
                               child: Center(
                                 child: Text(
-                                  "${item.timeInHour} : ${item.timeInMin} : ${item.timeInSec}",
+                                  TimerWidget.formatToHourMinSec(item.time),
                                   style: GoogleFonts.aBeeZee(
                                       color: Theme.of(context)
                                           .colorScheme
@@ -137,9 +137,7 @@ buildItem(AppFlowyGroupItem item, BuildContext context) {
                           : item.status == "In Progress"
                               ? TimerWidget(
                                   id: item.id,
-                                  seconds: item.timeInHour * 3600 +
-                                      item.timeInMin * 60 +
-                                      item.timeInSec,
+                                  seconds: item.time,
                                 )
                               : Container(),
                     ],

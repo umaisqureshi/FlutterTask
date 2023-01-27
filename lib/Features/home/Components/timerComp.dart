@@ -12,6 +12,29 @@ class TimerWidget extends ConsumerStatefulWidget {
   int seconds;
   TimerWidget({super.key, required this.id, required this.seconds});
 
+
+   static String formatToHourMinSec(
+    int value,
+  ) {
+    String hour = "";
+    String min = "";
+    String sec = "";
+    sec = (value % 60).toString();
+    min = (value / 60).toStringAsFixed(5);
+    hour = (value / 3600).toStringAsFixed(5);
+    if (sec.length == 1) {
+      sec = '0$sec';
+    }
+
+    if (min[1] == '.') {
+      min = min.substring(0, 1);
+    }
+    if (hour[1] == '.') {
+      hour = hour.substring(0, 1);
+    }
+    return "$hour : $min : $sec";
+  }
+
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _TimerWidgetState();
 }
@@ -21,9 +44,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
   late int elapsedTime;
   bool isStarted = false;
   Timer time = Timer(const Duration(), (() {}));
-  String hour = "";
-  String min = "";
-  String sec = "";
+
   void startAndStopTimer({required bool start}) {
     if (start) {
       setState(() {
@@ -43,24 +64,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
     }
   }
 
-  String formatToHourMinSec(
-    int value,
-  ) {
-    sec = (value % 60).toString();
-    min = (value / 60).toStringAsFixed(5);
-    hour = (value / 3600).toStringAsFixed(5);
-    if (sec.length == 1) {
-      sec = '0$sec';
-    }
 
-    if (min[1] == '.') {
-      min = min.substring(0, 1);
-    }
-    if (hour[1] == '.') {
-      hour = hour.substring(0, 1);
-    }
-    return "$hour : $min : $sec";
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,11 +76,8 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
               onTap: isStarted
                   ? () {
                       startAndStopTimer(start: false);
-                      ref.read(timeUpdateProvider(TimerModel(
-                          hour: int.parse(hour),
-                          id: widget.id,
-                          min: int.parse(min),
-                          sec: int.parse(sec))));
+                      ref.read(timeUpdateProvider(
+                          TimerModel(id: widget.id, sec: widget.seconds)));
                     }
                   : () {
                       startAndStopTimer(start: true);
@@ -98,7 +99,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
                   borderRadius: const BorderRadius.all(Radius.circular(10))),
               child: Center(
                 child: Text(
-                  formatToHourMinSec(widget.seconds),
+                 TimerWidget.formatToHourMinSec(widget.seconds),
                   style: GoogleFonts.aBeeZee(
                       color: Theme.of(context).colorScheme.onBackground,
                       fontSize: 15,

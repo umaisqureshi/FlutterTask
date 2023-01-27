@@ -36,9 +36,7 @@ class TaskViewControllerImp extends TaskViewController {
           "description": task.description,
           "status": task.status,
           "id": task.id,
-          "timeInHour": task.timeInHour,
-          "timeInMin": task.timeInMin,
-          "timeInSec": task.timeInSec,
+          "time": task.time,
           "assignee": task.assignee,
           "isComplete": task.status == "Complete" ? true : false,
           "completeAt": task.status == "Complete"

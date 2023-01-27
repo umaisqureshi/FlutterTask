@@ -21,9 +21,7 @@ class Tasks extends AppFlowyGroupItem {
   String sid;
   String status;
   String project;
-  int timeInHour;
-  int timeInMin;
-  int timeInSec;
+  int time;
   bool isCompleted;
   String assignee;
   int completeAt;
@@ -32,10 +30,8 @@ class Tasks extends AppFlowyGroupItem {
       {required this.name,
       required this.description,
       required this.sid,
-      required this.timeInHour,
-      required this.timeInMin,
+      required this.time,
       required this.assignee,
-      required this.timeInSec,
       required this.project,
       required this.isCompleted,
       required this.status,
@@ -51,9 +47,7 @@ class Tasks extends AppFlowyGroupItem {
       'project': project,
       'assignee': assignee,
       'createdAt': createdAt,
-      'timeInHour': timeInHour,
-      'timeInSec': timeInSec,
-      'timeInMin': timeInMin,
+      'time': time,
       'isComplete': isCompleted,
       'completeAt': completeAt
     };
@@ -69,9 +63,7 @@ class Tasks extends AppFlowyGroupItem {
       assignee: map['assignee'] as String,
       completeAt: map['completeAt'] as int,
       createdAt: map['createdAt'] as int,
-      timeInHour: map['timeInHour'] as int,
-      timeInMin: map['timeInMin'] as int,
-      timeInSec: map['timeInSec'] as int,
+      time: map['time'] as int,
       isCompleted: map['isComplete'] as bool,
     );
   }
@@ -86,13 +78,9 @@ class Tasks extends AppFlowyGroupItem {
 }
 
 class TimerModel {
-  int hour;
-  int min;
   int sec;
   String id;
   TimerModel({
-    required this.hour,
-    required this.min,
     required this.sec,
     required this.id,
   });

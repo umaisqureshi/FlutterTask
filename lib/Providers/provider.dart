@@ -22,7 +22,7 @@ final allTaskListProvider = StreamProvider<AllTasksModel>((ref) {
 
 final timeUpdateProvider = Provider.family<bool, TimerModel>((ref, timer) {
   return HomeControllerImp(ref)
-      .updateTimer(timer.id, timer.hour, timer.min, timer.sec);
+      .updateTimer(timer.id, timer.sec);
 });
 
 final statusUpdateProvider = Provider.family<bool, UpdateStatus>((ref, stat) {

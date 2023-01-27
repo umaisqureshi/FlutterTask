@@ -23,9 +23,7 @@ homeMiddleWidget(
         "Assignee",
         "Description",
         "Created At",
-        "Hours",
-        "Minutes",
-        "Second"
+        "Time",
       ],
       ...allList.map((e) => [
             e.name,
@@ -34,9 +32,7 @@ homeMiddleWidget(
             e.assignee,
             e.description,
             e.createdAt.toString(),
-            e.timeInHour.toString(),
-            e.timeInMin.toString(),
-            e.timeInSec.toString()
+            e.time.toString(),
           ]),
     ];
     if (await Permission.storage.request().isGranted) {

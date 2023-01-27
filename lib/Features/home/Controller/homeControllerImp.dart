@@ -33,12 +33,12 @@ class HomeControllerImp extends HomeViewController {
   }
 
   @override
-  bool updateTimer(String id, int hour, int min, int sec) {
+  bool updateTimer(String id, int sec) {
     final fire = ref.read(firebaseInstanceProvider).firestore;
     fire
         .collection("Tasks")
         .doc(id)
-        .update({"timeInHours": hour, "timeInMin": min, "timeInSec": sec})
+        .update({"time": sec})
         .then((value) => true)
         .onError((error, stackTrace) => false);
     return true;

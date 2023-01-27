@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertask/Features/TaskDetailView/Component/statusChangeComp.dart';
+import 'package:fluttertask/Features/home/Components/timerComp.dart';
 import 'package:fluttertask/Features/home/model/tasksModel.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -122,7 +123,7 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
                               : Container(),
                           titleAndDetailedWidget(
                               "Time Spend",
-                              "${widget.task.timeInHour} : ${widget.task.timeInMin} : ${widget.task.timeInSec}",
+                              TimerWidget.formatToHourMinSec(widget.task.time),
                               context,
                               size,
                               false,
@@ -152,10 +153,8 @@ class _TaskDetailedViewState extends ConsumerState<TaskDetailedView> {
                                           name: taskName.text,
                                           description: descriptionName.text,
                                           sid: widget.task.id,
-                                          timeInHour: widget.task.timeInHour,
-                                          timeInMin: widget.task.timeInMin,
+                                          time: widget.task.time,
                                           assignee: assigneeName.text,
-                                          timeInSec: widget.task.timeInSec,
                                           project: projectName.text,
                                           isCompleted: false,
                                           completeAt: 0,
